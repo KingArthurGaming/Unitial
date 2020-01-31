@@ -1,0 +1,69 @@
+﻿@using Unitial.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+
+    <!--<link rel="stylesheet" href="css/login.css">-->
+    <link rel="stylesheet" href="~/css/header.css">
+    <link rel="shortcut icon" type="image/png" href="~/images/Favicon.png" />
+
+
+
+</head>
+<!-- fragment head end -->
+
+<body>
+    <!-- fragment navi start -->
+
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="#"><img src="~/images/UnitialText.png" width="170px" alt="Unitial"></img></a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+
+                <partial name="_MyLoginPartial" />
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+    <!-- fragment navi end -->
+    <!-- fragment login start -->
+    <section class="home">
+    </section>
+    @this.RenderBody()
+    @this.RenderSection("Scripts", required: false)
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+</body>
+
+</html>
