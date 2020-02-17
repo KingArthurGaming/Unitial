@@ -1,0 +1,117 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<section class="login-block" style="margin-top:-400px">
+    <div class="container">
+        <div class="container-login">
+            <div class="row">
+                <div class="col-md-4 login-sec">
+                    <h2 class="text-center">Login Now</h2>
+                    <form class="login-form" id="account" method="post">
+
+                        <div asp-validation-summary="All" class="text-danger" style="font-size: 13px"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email" style="font-size: 20px"></label>
+                            <input asp-for="Input.Email" class="form-control" style="font-size: 15px">
+                            <span asp-validation-for="Input.Email" class="text-danger" style="font-size: 13px"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Input.Password" style="font-size: 20px"></label>
+                            <input asp-for="Input.Password" class="form-control" style="font-size: 15px" />
+                            <span asp-validation-for="Input.Password" class="text-danger" style="font-size: 13px"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe" style="font-size: 15px;">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-login float-right btn-lg">Log in</button>
+                        </div>
+
+
+                        <a class="btn btn-register float-right btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button"
+                           style="width:150px; height: 40px; margin-top: 70px; font-size:20px; margin-right: 20px;">Register</a>
+
+                    </form>
+                </div>
+                <div class="col-md-8 banner-sec">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <div class="slideshow-container">
+
+                                    <div style="text-align:center; display: none;">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="mySlides fade">
+                                        <img src="~/images/Login2.png" style="width:110%">
+                                    </div>
+
+                                    <div class="mySlides fade">
+                                        <img src="~/images/Login1.png" style="width:110%">
+                                    </div>
+
+                                    <div class="mySlides fade">
+                                        <img src="~/images/Login3.png" style="width:110%">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h1>Welcome To Unitial</h1>
+                                    <p>
+                                        Hello! This is Unitial a new platform for individuals and creators.
+                                        We are focused on delivering friendly space for sharing your
+                                        thoughts.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every X seconds
+    }
+</script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

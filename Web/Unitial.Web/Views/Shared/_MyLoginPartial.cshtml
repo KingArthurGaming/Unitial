@@ -1,0 +1,30 @@
+﻿@using Unitial.Common
+@using Unitial.Data.Models
+@using Microsoft.AspNetCore.Identity
+
+    <ul class="navbar-nav">
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <ul>
+                <li><a  href="/User/Profile">My Profile</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">About</a></li>
+                <li>
+                    <form  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+
+                        <button type="submit">
+                            Logout
+                        </button>
+                    </form>
+
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul>
+                <li><a href="/Identity/Account/Login">Log in</a></li>
+                <li><a href="/Identity/Account/Register">Register</a></li>
+            </ul>
+        }
+   

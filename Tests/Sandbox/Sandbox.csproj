@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Unitial.Common\Unitial.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Unitial.Data.Common\Unitial.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Unitial.Data.Models\Unitial.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Unitial.Data\Unitial.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Unitial.Services.Data\Unitial.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Unitial.Services.Mapping\Unitial.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\Unitial.Services.Messaging\Unitial.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\Unitial.Services\Unitial.Services.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,100 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="page-wrapper p-t-180 p-b-100 font-robo" style="margin-top:-400px">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-2">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="title">Registration Info</h2>
+                <form method="POST">
+
+
+                    <div asp-validation-summary="All" class="input-group">
+
+                        <div class="form-group">
+                            <input asp-for="Input.FirstName" class="input--style-2" placeholder="FirstName" size="23" />
+                            <span asp-validation-for="Input.FirstName" class="text-danger" style="font-size: 12px"></span>
+                            <hr />
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Input.LastName" class="input--style-2" placeholder="LastName" size="24" />
+                            <span asp-validation-for="Input.LastName" class="text-danger" style="font-size: 12px"></span>
+                            <hr />
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Input.Email" class="input--style-2" placeholder="Email" size="50" />
+                            <span asp-validation-for="Input.Email" class="text-danger" style="font-size: 12px"></span>
+                            <hr width="420px" />
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <input asp-for="Input.Password" class="input--style-2" placeholder="Password" size="50" />
+                            <span asp-validation-for="Input.Password" class="text-danger" style="font-size: 12px"></span>
+                            <hr width="420px" />
+
+
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Input.ConfirmPassword" class="input--style-2" placeholder="Confirm Password" size="50" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger" style="font-size: 12px"></span>
+                            <hr />
+
+                        </div>
+
+
+                        <div class="col-lg-5" style="margin-left:-27px;">
+
+
+                            <div class="form-group">
+                                <input class="input--style-2 " asp-for="Input.Birthday" type="date" data-date="" data-date-format="DD/MM/YYYY" style="margin-top: 10px;" value="26-08-1980">
+                                <p class="input--style-2" style=" font-size:13px; margin-left :15px; margin-top: -70px;">Birthday</p>
+                            </div>
+                            <span asp-validation-for="Input.Birthday" class="text-danger" style="display:none"></span>
+                        </div>
+
+                        
+
+
+                        <div class="p-t-40" style="width:200px; padding-bottom:20px; ">
+                            <button class="btn btn--radius btn--green" type="submit">Register</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery JS-->
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="~/vendor/select2/select2.min.js"></script>
+<script src="~/vendor/datepicker/moment.min.js"></script>
+<script src="~/vendor/datepicker/daterangepicker.js"></script>
+
+<!-- Main JS-->
+<script src="~/js/global.js"></script>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script>
+    $("input").on("change", function () {
+        this.setAttribute(
+            "data-date",
+            moment(this.value, "YYYY-MM-DD")
+                .format(this.getAttribute("data-date-format"))
+        )
+    }).trigger("change")
+</script>
+
