@@ -1,27 +1,33 @@
 ﻿namespace Unitial.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
-    using Unitial.Web.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using Unitial.Services.Data;
 
     public class UserController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IProfileService profileService;
 
-        public UserController(IUserService userService)
+        public UserController(IProfileService profileService)
         {
-            this.userService = userService;
+            this.profileService = profileService;
         }
 
         [Authorize]
-        public IActionResult Profile()
+        public IActionResult MyProfile()
         {
             var username = User.Identity.Name;
-            var user = userService.GetUserByUsername(username);
+            var uesrId = profileService.GetMyUserIdByUsername(username);
+            return Redirect($"Profile?uesrId={uesrId}") ;
+        }
+
+        [Authorize]
+        public IActionResult Profile(string uesrId)
+        {
+            var user = profileService.GetUserInfo(uesrId);
             return View(user);
         }
 
 
     }
 }
-

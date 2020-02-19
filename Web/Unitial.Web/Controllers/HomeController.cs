@@ -3,13 +3,17 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+    using Unitial.Services.Data;
     using Unitial.Web.ViewModels;
 
     public class HomeController : BaseController
     {
+
         [Authorize]
         public IActionResult Index()
         {
+
+
             return this.View();
         }
 

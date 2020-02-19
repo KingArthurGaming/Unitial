@@ -18,7 +18,6 @@
     using Unitial.Services.Data;
     using Unitial.Services.Mapping;
     using Unitial.Services.Messaging;
-    using Unitial.Web.Services;
     using Unitial.Web.ViewModels;
 
     public class Startup
@@ -38,7 +37,6 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -70,7 +68,10 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IProfileService, ProfileService>();
+            //services.AddTransient<Interface1, Class1>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

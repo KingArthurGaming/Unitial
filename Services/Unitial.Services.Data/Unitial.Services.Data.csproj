@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Unitial.Data.Common\Unitial.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Unitial.Data.Models\Unitial.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\Unitial.Web.ViewModels\Unitial.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Unitial.Services.Mapping\Unitial.Services.Mapping.csproj" />
   </ItemGroup>
 

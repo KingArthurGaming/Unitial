@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Unitial.Web.ViewModels
+﻿namespace Unitial.Web.ViewModels
 {
     public class UsersProfileViewModel
     {

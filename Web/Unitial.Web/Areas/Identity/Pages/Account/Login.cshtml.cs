@@ -52,12 +52,11 @@ namespace Unitial.Web.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             if (User.Identity.IsAuthenticated)
             {
-                 RedirectToPage("./");
-
+                return RedirectToAction("Index", "Home", new { area = "" });
             }
 
             if (!string.IsNullOrEmpty(ErrorMessage))
@@ -73,10 +72,17 @@ namespace Unitial.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             returnUrl = returnUrl ?? Url.Content("~/");
 
             if (ModelState.IsValid)
