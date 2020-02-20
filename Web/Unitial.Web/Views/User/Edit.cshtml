@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="page-wrapper p-t-180 p-b-100 font-robo" style="margin-top:-400px">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-2">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="title">User Profile Info</h2>
+                <form method="post">
+                    <div class="input-group">
+                        <div class="form-group">
+                            <input class="input--style-2" placeholder="FirstName" name="FirstName" size="23" pattern="^[_A-z0-9]{3,}$" maxlength="50" required>
+                            <span class="text-danger" style="font-size: 12px"></span>
+                            <hr>
+                        </div>
+                        <div class="form-group">
+                            <input class="input--style-2" placeholder="LastName" name="LastName" size="24" pattern="^[_A-z0-9]{3,}$" maxlength="50" required>
+                            <span class="text-danger" style="font-size: 12px"></span>
+                            <hr>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="input--style-2 " placeholder="Old Password" name="OldPassword" size="50" pattern="^.{5,20}$" maxlength="50" required>
+                            <span class="text-danger" style="font-size: 12px"></span>
+                            <hr width="420px">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="input--style-2 " placeholder="New Password" name="NewPassword" size="23" pattern="^.{5,20}$" maxlength="50" required>
+                            <span class="text-danger" style="font-size: 12px"></span>
+                            <hr>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="input--style-2 " placeholder="Confirm Password" name="ConfirmPassword" size="24" pattern="^.{5,20}$" maxlength="50" required>
+                            <span class="text-danger" style="font-size: 12px"></span>
+                            <hr>
+                        </div>
+                        <div class="form-group">
+                            <input class="input--style-2 " placeholder="Description" name="Description" size="50" maxlength="250">
+                            <span class="text-danger" style="font-size: 12px"></span>
+                            <hr>
+                        </div>                    
+                        <div class="p-t-100" style="width:200px; padding-bottom:20px;">
+                            <button class="btn btn--radius btn--green" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- Jquery JS-->
+<script src="~/vendor/jquery/jquery.min.js">
+</script> <!-- Vendor JS-->
+<script src="~/vendor/select2/select2.min.js">
+</script>
+<script src="~/vendor/datepicker/moment.min.js">
+</script>
+
+<script>
+    $(document).ready(function () {
+
+
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.profile-pic').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        $(".upload-button").on('click', function () {
+            $(".file-upload").click();
+        });
+    });
+</script>

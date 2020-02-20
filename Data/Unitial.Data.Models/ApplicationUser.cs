@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace Unitial.Data.Models
+﻿namespace Unitial.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
     using System;

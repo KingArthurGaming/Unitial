@@ -41,11 +41,11 @@
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequiredUniqueChars = 2;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequireDigit = true;
+                options.Password.RequireDigit = false;
             });
 
             services.Configure<CookiePolicyOptions>(

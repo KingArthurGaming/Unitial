@@ -403,5 +403,10 @@ footer p a:hover {
     text-decoration: none;
 }
 
+.btn {
+    color: #ffffff;
+    background-color: #495057;
+    border-color: #fff;
+}
 
 

@@ -1,5 +1,6 @@
 ﻿namespace Unitial.Web.Controllers
 {
+    using InputModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Unitial.Services.Data;
@@ -18,7 +19,7 @@
         {
             var username = User.Identity.Name;
             var uesrId = profileService.GetMyUserIdByUsername(username);
-            return Redirect($"Profile?uesrId={uesrId}") ;
+            return Redirect($"Profile?uesrId={uesrId}");
         }
 
         [Authorize]
@@ -26,6 +27,30 @@
         {
             var user = profileService.GetUserInfo(uesrId);
             return View(user);
+        }
+
+        [Authorize]
+        public IActionResult Edit()
+        {
+            var username = User.Identity.Name;
+            var uesrId = profileService.GetMyUserIdByUsername(username);
+            var user = profileService.GetUserInfo(uesrId);
+
+            return View(user);
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(UserEditInfoModel userInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(userInfo);
+            }
+            var username = User.Identity.Name;
+            var uesrId = profileService.GetMyUserIdByUsername(username);
+            var user = profileService.GetUserInfo(uesrId);
+
+            return Profile(uesrId);
         }
 
 

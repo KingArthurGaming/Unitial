@@ -19,17 +19,17 @@ using Unitial.Data.Models.Attribute;
 namespace Unitial.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class Edit : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<Edit> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        public Edit(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<Edit> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -58,7 +58,7 @@ namespace Unitial.Web.Areas.Identity.Pages.Account
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
             [Display(Name = "LastName")]
             public string LastName { get; set; }
 
@@ -98,7 +98,7 @@ namespace Unitial.Web.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     Birthday = Input.Birthday,
-                    Description = "There is no description yet. Click edit to customize your profile. ",
+                    Description = "There is no description yet. Click edit to customize your profile.",
                     ImageUrl = "https://i.ya-webdesign.com/images/default-avatar-png-6.png"
             };
                 var result = await _userManager.CreateAsync(user, Input.Password);
