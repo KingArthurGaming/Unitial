@@ -1,8 +1,11 @@
-﻿namespace Unitial.Web.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Unitial.Web.ViewModels
 {
-    public class UsersProfileViewModel
+    class EditInfoViewModel
     {
-        public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }

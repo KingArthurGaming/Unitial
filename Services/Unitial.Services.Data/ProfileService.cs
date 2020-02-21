@@ -37,6 +37,7 @@ namespace Unitial.Services.Data
                 .Where(x => x.Id == userId)
                 .Select(x => new UsersProfileViewModel()
                 {
+                    Username = x.UserName,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     Description = x.Description,
@@ -44,6 +45,22 @@ namespace Unitial.Services.Data
                 })
                 .FirstOrDefault();
             return userInfo;
+        }
+        public string ChangeUserInfo(string userId)
+        {
+            var userInfo = userRepository
+                .All()
+                .Where(x => x.Id == userId)
+                .Select(x => new UsersProfileViewModel()
+                {
+                    Username = x.UserName,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl
+                })
+                .FirstOrDefault();
+            return "";
         }
     }
 }

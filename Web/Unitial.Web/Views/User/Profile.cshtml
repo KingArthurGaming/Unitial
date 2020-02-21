@@ -26,11 +26,14 @@
                     @Model.Description
                 </p>
             </div>
-            <div style="display:flex;justify-content:center;align-items:center;">
-                <div style="width:100px;height:30px;">
-                    <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style="width:100px; height:30px;" value="Edit">Edit</a>
+            @if (User.Identity.Name==Model.Username)
+            {
+                <div style="display:flex;justify-content:center;align-items:center;">
+                    <div style="width:100px;height:30px;">
+                        <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style="width:100px; height:30px;" value="Edit">Edit</a>
+                    </div>
                 </div>
-            </div>
+            }
 
 
         </div>
