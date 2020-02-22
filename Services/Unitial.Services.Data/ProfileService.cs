@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
 using Unitial.Web.ViewModels;
@@ -12,20 +9,25 @@ namespace Unitial.Services.Data
     public class ProfileService : IProfileService
     {
         private readonly IRepository<ApplicationUser> userRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ProfileService(
-            IRepository<ApplicationUser> userRepository
+            IRepository<ApplicationUser> userRepository,
+            UserManager<ApplicationUser> userManager
+
             )
         {
             this.userRepository = userRepository;
+            this.userManager = userManager;
         }
 
         public string GetMyUserIdByUsername(string username)
         {
-            var userId= userRepository
+
+            var userId = userRepository
                 .All()
                 .Where(x => x.UserName == username)
-                .Select(x => x.Id )
+                .Select(x => x.Id)
                 .FirstOrDefault();
             return userId;
         }
@@ -46,21 +48,25 @@ namespace Unitial.Services.Data
                 .FirstOrDefault();
             return userInfo;
         }
-        public string ChangeUserInfo(string userId)
+
+        public void EditUserInfo(UserEditInfoModel userInfo, string userId)
         {
-            var userInfo = userRepository
-                .All()
-                .Where(x => x.Id == userId)
-                .Select(x => new UsersProfileViewModel()
-                {
-                    Username = x.UserName,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Description = x.Description,
-                    ImageUrl = x.ImageUrl
-                })
-                .FirstOrDefault();
-            return "";
+
+            var user = userRepository.All().Where(x => x.Id == userId).FirstOrDefault();
+
+            if (userInfo.ImageUrl != null)
+            {
+                user.ImageUrl = userInfo.ImageUrl;
+            }
+
+            if (userInfo.Description != null)
+            {
+                user.Description = userInfo.Description;
+            }
+             user.FirstName = userInfo.FirstName;
+            user.LastName = userInfo.LastName;
+
+            userRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
     }
 }

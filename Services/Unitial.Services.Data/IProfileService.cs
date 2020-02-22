@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Unitial.Web.ViewModels;
+﻿using Unitial.Web.ViewModels;
 
 namespace Unitial.Services.Data
 {
@@ -10,6 +7,8 @@ namespace Unitial.Services.Data
         public UsersProfileViewModel GetUserInfo(string userId);
 
         public string GetMyUserIdByUsername(string username);
+
+        public void EditUserInfo(UserEditInfoModel userInfo, string userId);
 
     }
 }

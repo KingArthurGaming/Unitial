@@ -13,11 +13,11 @@
                 <form method="post">
                     <div class="input-group">
                         <div class="form-group">
-                            <input class="input--style-2" placeholder="First Name" name="FirstName" size="23" pattern="^[_A-z0-9]{3,}$" maxlength="50" required>
+                            <input class="input--style-2" placeholder="First Name" name="FirstName" size="23" value="@Model.FirstName" pattern="^[_A-z0-9]{3,}$" maxlength="50" required>
                             <hr>
                         </div>
                         <div class="form-group">
-                            <input class="input--style-2" placeholder="Last Name" name="LastName" size="24" pattern="^[_A-z0-9]{3,}$" maxlength="50" required>
+                            <input class="input--style-2" placeholder="Last Name" name="LastName" size="24" value="@Model.LastName" pattern="^[_A-z0-9]{3,}$" maxlength="50" required>
                             <hr>
                         </div>
                         <div class="form-group">
@@ -25,7 +25,7 @@
                             <hr>
                         </div>
                         <div class="form-group">
-                            <input class="input--style-2 " placeholder="Profile Pic Url." name="ImageUrl" size="50">
+                            <input class="input--style-2 " placeholder="Profile Pic Url."  name="ImageUrl" size="50">
                             <hr>
                         </div>
 

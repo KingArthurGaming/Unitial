@@ -1,9 +1,9 @@
 ﻿namespace Unitial.Web.Controllers
 {
-    using InputModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Unitial.Services.Data;
+    using Unitial.Web.ViewModels;
 
     public class UserController : Controller
     {
@@ -42,15 +42,16 @@
         [HttpPost]
         public IActionResult Edit(UserEditInfoModel userInfo)
         {
+
             if (ModelState.IsValid)
             {
                 return View(userInfo);
             }
             var username = User.Identity.Name;
             var uesrId = profileService.GetMyUserIdByUsername(username);
-            var user = profileService.GetUserInfo(uesrId);
+            profileService.EditUserInfo(userInfo, uesrId);
 
-            return Profile(uesrId);
+            return Redirect($"Profile?uesrId={uesrId}");
         }
 
 
