@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Linq;
+﻿using System.Linq;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
 using Unitial.Web.ViewModels;
@@ -9,16 +8,10 @@ namespace Unitial.Services.Data
     public class ProfileService : IProfileService
     {
         private readonly IRepository<ApplicationUser> userRepository;
-        private readonly UserManager<ApplicationUser> userManager;
 
-        public ProfileService(
-            IRepository<ApplicationUser> userRepository,
-            UserManager<ApplicationUser> userManager
-
-            )
+        public ProfileService(IRepository<ApplicationUser> userRepository)
         {
             this.userRepository = userRepository;
-            this.userManager = userManager;
         }
 
         public string GetMyUserIdByUsername(string username)
@@ -63,7 +56,7 @@ namespace Unitial.Services.Data
             {
                 user.Description = userInfo.Description;
             }
-             user.FirstName = userInfo.FirstName;
+            user.FirstName = userInfo.FirstName;
             user.LastName = userInfo.LastName;
 
             userRepository.SaveChangesAsync().GetAwaiter().GetResult();
