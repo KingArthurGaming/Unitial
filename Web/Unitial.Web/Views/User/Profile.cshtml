@@ -33,24 +33,29 @@
                         <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style="width:100px; height:30px;" value="Edit">Edit</a>
                     </div>
                 </div>
-            }
-
-
-            <div class="accordionWrapper">
-                <div class="accordionItem open">
-                    <h2 class="accordionItemHeading">About accordions</h2>
-                    <div class="accordionItemContent">
-                        <p>JavaScript accordions let you squeeze a lot of content into a small space in a Web page.</p>
-                        <p>This simple accordion degrades gracefully in browsers that don't support JavaScript or CSS.</p>
+                <div style="display:flex;justify-content:center;align-items:center;">
+                    <div class="accordionWrapper">
+                        <div class="accordionItem close">
+                            <h2 class="accordionItemHeading">New Post</h2>
+                            <div class="accordionItemContent">
+                                <form method="post">
+                                    <div class="form-group">
+                                        <textarea style="font-size:16px" class="form-control" placeholder="Post Caption" name="Caption" rows="2"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea style="font-size:16px" class="form-control" placeholder="ImageUrl" name="ImageUrl" rows="2"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            }
 
 
             <section class="hero">
                 <!-- Start Post Fragment -->
-                <div class="container">
+                <div class="container" style="justify-content:center;align-items:center;">
                     <div class="row">
 
                         <div class="col-lg-6 offset-lg-3">
@@ -62,9 +67,7 @@
                                     <div class="media m-0">
                                         <div class="d-flex mr-0">
                                             <a href="">
-                                                <img class="img-fluid rounded-circle"
-                                                     src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/4.jpg"
-                                                     alt="User">
+                                                <img class="img-fluid rounded-circle" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/4.jpg" alt="User">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -88,9 +91,7 @@
                                 <!--/ cardbox-heading -->
 
                                 <div class="cardbox-item">
-                                    <img class="img-fluid"
-                                         src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/1.jpg"
-                                         alt="Image">
+                                    <img class="img-fluid" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/1.jpg" alt="Image">
                                 </div>
                                 <!--/ cardbox-item -->
                                 <div class="cardbox-base">
@@ -109,9 +110,7 @@
                                 <div class="cardbox-comments">
                                     <span class="comment-avatar float-left">
                                         <a href="">
-                                            <img class="rounded-circle"
-                                                 src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/6.jpg"
-                                                 alt="...">
+                                            <img class="rounded-circle" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/6.jpg" alt="...">
                                         </a>
                                     </span>
                                     <div class="search">
@@ -217,10 +216,10 @@
                 </div>
                 <!--/ container -->
                 <!-- End Post Fragment -->
+
             </section>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Jquery needed -->
@@ -244,4 +243,5 @@
         if (itemClass == 'accordionItem close') {
             this.parentNode.className = 'accordionItem open';
         }
-    }</script>
+    }
+</script>

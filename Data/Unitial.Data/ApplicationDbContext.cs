@@ -23,6 +23,9 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Like> Likes{ get; set; }
+        public DbSet<Comment> Comments{ get; set; }
+        public DbSet<Post> Posts{ get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -70,6 +73,10 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.Entity<Like>()
+                .HasKey(ul => new { ul.UserId, ul.PostId });
+
         }
 
         private static void ConfigureUserIdentityRelations(ModelBuilder builder)
@@ -94,6 +101,7 @@
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

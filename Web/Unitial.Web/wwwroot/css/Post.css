@@ -9,11 +9,13 @@
     padding: 6.25rem 0px !important;
     margin: 0px !important;
   }
-  .cardbox {
+.cardbox {
+    width: 512px ;
+    height:757.33px;
     border-radius: 3px;
     margin-bottom: 20px;
     padding: 0px !important;
-  }
+}
   
   /* ------------------------------- */
   /* Cardbox Heading
