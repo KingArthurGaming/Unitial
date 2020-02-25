@@ -69,7 +69,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IProfileService, ProfileService>();
-            //services.AddTransient<Interface1, Class1>();
+            services.AddTransient<IPostService, PostService>();
 
 
         }

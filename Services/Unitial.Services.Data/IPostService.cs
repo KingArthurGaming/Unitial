@@ -7,6 +7,7 @@ namespace Unitial.Services.Data
 {
     public interface IPostService
     {
-        public void CreatePost(CreatePostInputModel createPostInput);
+        public void CreatePost(CreatePostInputModel createPostInput , string userId);
+        public string GetMyUserIdByUsername(string username);
     }
 }

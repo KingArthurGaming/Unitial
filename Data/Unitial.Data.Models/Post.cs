@@ -19,7 +19,7 @@ namespace Unitial.Data.Models
         public string Caption { get; set; }
         public bool HaveImage { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime PostedOn { get; set; } = DateTime.UtcNow;
+        public DateTime PostedOn { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Like> Likes { get; set; }
