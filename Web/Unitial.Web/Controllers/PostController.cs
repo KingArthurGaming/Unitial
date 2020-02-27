@@ -14,6 +14,7 @@ namespace Unitial.Web.Controllers
         public PostController(IPostService postService)
         {
             this.postService = postService;
+            
         }
 
         [HttpPost]

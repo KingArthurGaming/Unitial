@@ -1,4 +1,6 @@
 ﻿@using Unitial.Web.ViewModels
+
+
 @{
     this.ViewData["Title"] = "Profile";
 }
@@ -38,16 +40,21 @@
                 <div style="display:flex;justify-content:center;align-items:center;">
                     <div class="accordionWrapper">
                         <div class="accordionItem close">
-                            <h2 class="accordionItemHeading">New Post</h2>
+                            <h2 class="accordionItemHeading"> Create New Post.</h2>
                             <div class="accordionItemContent">
-                                <form method="post" asp-action="CreatePost" asp-controller="Post">
+                                <form method="post" asp-action="CreatePost" asp-controller="Post" enctype="multipart/form-data">
+
                                     <div class="form-group">
                                         <textarea style="font-size:16px" class="form-control" placeholder="Post Caption" name="caption" rows="2" pattern="^.{1,200}$" required></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <textarea style="font-size:16px" class="form-control" placeholder="ImageUrl" name="imageUrl" rows="2" required></textarea>
+
+                                    <div class="form-group custom-file">
+
+                                        <input type="file" class=" form-control custom-file-input " style="font-size:16px" name="UploadImage" id="file-upload" accept="image/*"  required>
+                                        <label class="form-control custom-file-label" style="font-size:16px" for="customFile">Upload Image</label>
                                     </div>
-                                    <button class="btn-lg btn--radius btn-outline-dark" style="font-weight:500; width:80px; height:30px; " type="submit">Create</button>
+
+                                    <button class="btn-lg btn--radius btn-outline-dark" style="font-weight:500; width:80px; height:30px; margin-top:20px" type="submit">Create</button>
                                 </form>
                             </div>
                         </div>
@@ -57,12 +64,23 @@
 
 
             <section class="hero">
-                @{
+
+                @if (@Model.PostsViewModels.Count > 0)
+                {
                     foreach (PostViewModel item in Model.PostsViewModels)
                     {
                         Html.RenderPartial("_PostPartial", item);
                     }
                 }
+                else
+                {
+                    <h3 style="text-align:center">
+                        You have no posts yet.
+                        Click new post to create one!
+                    </h3>
+                }
+
+
             </section>
         </div>
     </div>
@@ -90,4 +108,12 @@
             this.parentNode.className = 'accordionItem open';
         }
     }
+</script>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 </script>

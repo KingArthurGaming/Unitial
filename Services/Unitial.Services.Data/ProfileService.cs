@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CloudinaryDotNet;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.Linq;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
@@ -67,19 +69,49 @@ namespace Unitial.Services.Data
 
             var user = userRepository.All().Where(x => x.Id == userId).FirstOrDefault();
 
-            if (userInfo.ImageUrl != null)
+            if (userInfo.UploadImage != null )
             {
-                user.ImageUrl = userInfo.ImageUrl;
+                user.ImageUrl = UploadProfileImageCloudinary(userId, userInfo.UploadImage);
             }
-
-            if (userInfo.Description != null)
+            if (userInfo.Description != null && userInfo.Description != user.UserName)
             {
                 user.Description = userInfo.Description;
             }
-            user.FirstName = userInfo.FirstName;
-            user.LastName = userInfo.LastName;
+            if (userInfo.FirstName != user.FirstName)
+            {
+                user.FirstName = userInfo.FirstName;
+
+            }
+            if (userInfo.LastName != user.LastName)
+            {
+                user.LastName = userInfo.LastName;
+            }
 
             userRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
+
+        private string UploadProfileImageCloudinary(string userId, IFormFile UploadImage)
+        {
+            CloudinaryDotNet.Account account =
+                new CloudinaryDotNet.Account("king-arthur", "693651971897844", "JYfv0XETXA21-BnVlBeOmGCrByE");
+
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+
+            var fileName = $"{userId}_Profile_Picture";
+
+            var stream = UploadImage.OpenReadStream();
+
+            CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+            {
+                File = new FileDescription(UploadImage.FileName, stream),
+                PublicId = fileName,
+            };
+
+            CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+
+            var updatedUrl = cloudinary.GetResource(uploadResult.PublicId).Url;
+            return updatedUrl;
+        }
     }
 }
+

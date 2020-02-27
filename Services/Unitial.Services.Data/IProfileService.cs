@@ -1,4 +1,5 @@
-﻿using Unitial.Web.ViewModels;
+﻿using Microsoft.AspNetCore.Http;
+using Unitial.Web.ViewModels;
 
 namespace Unitial.Services.Data
 {
@@ -9,6 +10,8 @@ namespace Unitial.Services.Data
         public string GetMyUserIdByUsername(string username);
 
         public void EditUserInfo(UserEditInfoModel userInfo, string userId);
+
+        
 
     }
 }

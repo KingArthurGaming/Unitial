@@ -99,8 +99,8 @@ namespace Unitial.Web.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     Birthday = Input.Birthday,
                     Description = "There is no description yet. Click edit to customize your profile.",
-                    ImageUrl = "https://i.ya-webdesign.com/images/default-avatar-png-6.png"
-            };
+                    ImageUrl = "https://res.cloudinary.com/king-arthur/image/upload/v1582805826/49744aa8-fd2d-4204-9db7-1b230f170351_default-profile-pic.png_Post_Picture.png"
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

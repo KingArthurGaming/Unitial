@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using Unitial.Data.Models.Attribute;
 
 namespace Unitial.Web.ViewModels
 {
@@ -37,7 +36,8 @@ namespace Unitial.Web.ViewModels
         [MaxLength(250)]
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        [DataType(DataType.Upload)]
+        public IFormFile UploadImage { get; set; }
 
     }
 }
