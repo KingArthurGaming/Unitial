@@ -64,6 +64,11 @@
         <script src="js/Profile.js"></script>
 
     }
+    @if (this.ViewData["Title"] == "About")
+    {
+        <link rel="stylesheet" href="~/css/About.css">
+
+    }
     <link rel="stylesheet" href="~/css/header.css">
 
     <link rel="shortcut icon" type="image/png" href="~/images/Favicon.png" />
@@ -79,7 +84,7 @@
     <nav class="nav">
         <div class="container">
             <div class="logo">
-                <a href="#"><img src="~/images/UnitialText.png" width="170px" alt="Unitial"></img></a>
+                <a href="/"><img src="~/images/UnitialText.png" width="170px" alt="Unitial"></img></a>
             </div>
             <div id="mainListDiv" class="main_list">
 

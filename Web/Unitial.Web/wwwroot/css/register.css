@@ -500,6 +500,47 @@ input {
   }
 }
 
+.card-3 {
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.4);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    width: 100%;
+    display: table;
+}
+
+    .card-3 .card-heading {
+        background: url("../images/bg-heading-02.jpg") top left/cover no-repeat;
+        width: 29.1%;
+        display: table-cell;
+    }
+
+    .card-3 .card-body {
+        display: table-cell;
+        padding: 80px 90px;
+        padding-bottom: 88px;
+    }
+
+@media (max-width: 767px) {
+    .card-3 {
+        display: block;
+    }
+
+        .card-3 .card-heading {
+            width: 100%;
+            display: block;
+            padding-top: 300px;
+            background-position: left center;
+        }
+
+        .card-3 .card-body {
+            display: block;
+            padding: 60px 50px;
+        }
+}
+
 .btn-register{background: #2496ed; color:#ffffff; font-weight:600;}
 .btn-register:hover {background-color: #217ec5; color: #FFF;}
 
