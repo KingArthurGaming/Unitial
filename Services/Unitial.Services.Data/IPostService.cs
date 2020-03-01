@@ -10,5 +10,6 @@ namespace Unitial.Services.Data
     {
         public void CreatePost(CreatePostInputModel createPostInput, string userId);
         public string GetMyUserIdByUsername(string username);
+        public ICollection<PostViewModel> GetPostsById(string userId);
     }
 }

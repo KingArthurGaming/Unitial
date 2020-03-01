@@ -12,13 +12,17 @@ namespace Unitial.Services.Data
     {
         private readonly IRepository<ApplicationUser> userRepository;
         private readonly IRepository<Post> postRepository;
+        private readonly IPostService postService;
 
         public ProfileService(
             IRepository<ApplicationUser> userRepository,
-            IRepository<Post> postRepository)
+            IRepository<Post> postRepository,
+            IPostService postService
+            )
         {
             this.userRepository = userRepository;
             this.postRepository = postRepository;
+            this.postService = postService;
         }
 
         public string GetMyUserIdByUsername(string username)
@@ -34,17 +38,7 @@ namespace Unitial.Services.Data
 
         public UsersProfileViewModel GetUserInfo(string userId)
         {
-            var posts = postRepository
-                .All()
-                .Where(x => x.AuthorId == userId)
-                .Select(x => new PostViewModel()
-                {
-                    UserId = x.AuthorId,
-                    UserImageUrl = x.Author.ImageUrl,
-                    UserFullName = x.Author.FirstName + " " + x.Author.LastName,
-                    PostImageUrl = x.ImageUrl,
-                    Likes = x.Likes.Count.ToString(),
-                }).ToList();
+            var posts = postService.GetPostsById(userId);
 
 
             var userInfo = userRepository
@@ -69,7 +63,7 @@ namespace Unitial.Services.Data
 
             var user = userRepository.All().Where(x => x.Id == userId).FirstOrDefault();
 
-            if (userInfo.UploadImage != null )
+            if (userInfo.UploadImage != null)
             {
                 user.ImageUrl = UploadProfileImageCloudinary(userId, userInfo.UploadImage);
             }

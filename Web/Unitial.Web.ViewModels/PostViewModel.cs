@@ -1,4 +1,6 @@
-﻿namespace Unitial.Web.ViewModels
+﻿using System;
+
+namespace Unitial.Web.ViewModels
 {
     public class PostViewModel
     {
@@ -7,6 +9,7 @@
         public string UserFullName { get; set; }
         public string PostImageUrl { get; set; }
         public string Likes { get; set; }
+        public DateTime PostedOn { get; set; }
     }
 }
 

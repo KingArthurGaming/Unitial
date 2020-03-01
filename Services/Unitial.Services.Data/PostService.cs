@@ -1,6 +1,7 @@
 ﻿using CloudinaryDotNet;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
@@ -54,7 +55,7 @@ namespace Unitial.Services.Data
 
             CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
 
-            var fileName = $"{userId}_{UploadImage.FileName}_Post_Picture";
+            var fileName = $"{userId}_{UploadImage.Name}_Post_Picture";
 
             var stream = UploadImage.OpenReadStream();
 
@@ -68,6 +69,46 @@ namespace Unitial.Services.Data
 
             var updatedUrl = cloudinary.GetResource(uploadResult.PublicId).Url;
             return updatedUrl;
+        }
+
+        public ICollection<PostViewModel> GetPostsById(string userId)
+        {
+            ICollection<PostViewModel> posts;
+            if (userId != null)
+            {
+                posts = postRepository
+                   .All()
+                   .Where(x => x.AuthorId == userId)
+                   .Select(x => new PostViewModel()
+                   {
+                       UserId = x.AuthorId,
+                       UserImageUrl = x.Author.ImageUrl,
+                       UserFullName = x.Author.FirstName + " " + x.Author.LastName,
+                       PostImageUrl = x.ImageUrl,
+                       Likes = x.Likes.Count.ToString(),
+                       PostedOn =x.PostedOn,
+                   })
+                   .OrderByDescending(x=>x.PostedOn)
+                   .ToList();
+            }
+            else
+            {
+                posts = postRepository
+                   .All()
+                   .Select(x => new PostViewModel()
+                   {
+                       UserId = x.AuthorId,
+                       UserImageUrl = x.Author.ImageUrl,
+                       UserFullName = x.Author.FirstName + " " + x.Author.LastName,
+                       PostImageUrl = x.ImageUrl,
+                       Likes = x.Likes.Count.ToString(),
+                       PostedOn = x.PostedOn,
+                   })
+                   .OrderByDescending(x => x.PostedOn)
+                   .ToList();
+            }
+            return posts;
+
         }
     }
 }
