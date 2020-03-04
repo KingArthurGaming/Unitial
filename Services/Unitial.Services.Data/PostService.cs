@@ -100,6 +100,8 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn =x.PostedOn,
+                       HaveLikes =x.HaveLikes,
+                       HaveComments =x.HaveComments,
                    })
                    .OrderByDescending(x=>x.PostedOn)
                    .ToList();
@@ -116,6 +118,8 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
+                       HaveLikes = x.HaveLikes,
+                       HaveComments = x.HaveComments,
                    })
                    .OrderByDescending(x => x.PostedOn)
                    .ToList();

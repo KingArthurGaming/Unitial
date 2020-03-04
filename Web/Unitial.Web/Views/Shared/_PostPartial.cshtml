@@ -1,7 +1,7 @@
-﻿<div class="container" style="margin-left:25px" >
+﻿<div class="container" style="margin-left:25px">
     <div class="row">
 
-        <div class="col-lg-6 offset-lg-3" >
+        <div class="col-lg-6 offset-lg-3">
 
             <div class="cardbox shadow-lg bg-white" style="height:auto">
 
@@ -17,7 +17,7 @@
                             <a href="/User/Profile?uesrId=@Model.UserId">
                                 <p class="m-0">@Model.UserFullName</p>
                             </a>
-                            
+
                             <small>
                                 <span>
                                     <i class="icon ion-md-time"></i> @Model.PostedOn.ToString("dd/MM/yyyy")
@@ -28,29 +28,34 @@
                 </div>
 
                 <div class="cardbox-item">
-                    <img class="img-fluid" src="@Model.PostImageUrl" alt="Image">
+                    <img class="img-fluid" style="padding-bottom:30px" src="@Model.PostImageUrl" alt="Image">
                 </div>
-                <div class="cardbox-base">
-                    <ul class="float-right">
-                    </ul>
-                    <ul class="float-left">
-                        <li><a><i class="fa fa-thumbs-up"></i></a></li>
-                        <li><a><span>@Model.Likes Likes</span></a></li>
-                    </ul>
-                </div>
-
-                <div class="cardbox-comments">
-                    <span class="comment-avatar float-left">
-                        <a href="">
-                            <img class="rounded-circle" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/6.jpg">
-                        </a>
-                    </span>
-                    <div class="search">
-                        <input placeholder="Write a comment" type="text">
-                         <button><i class="fa fa-camera"></i></button> 
+                @if (Model.HaveLikes)
+                {
+                    <div class="cardbox-base">
+                        <ul class="float-right">
+                        </ul>
+                        <ul class="float-left">
+                            <li><a><i class="fa fa-thumbs-up"></i></a></li>
+                            <li><a><span>@Model.Likes Likes</span></a></li>
+                        </ul>
                     </div>
+                }
+                @if (Model.HaveComments)
+                {
+                    <div class="cardbox-comments">
+                        <span class="comment-avatar float-left">
+                            <a href="">
+                                <img class="rounded-circle" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/6.jpg">
+                            </a>
+                        </span>
+                        <div class="search">
+                            <input placeholder="Write a comment" type="text">
+                            <button><i class="fa fa-camera"></i></button>
+                        </div>
 
-                </div>
+                    </div>
+                }
             </div>
 
         </div>
