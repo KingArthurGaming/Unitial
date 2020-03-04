@@ -9,5 +9,7 @@ namespace Unitial.Web.ViewModels
 
         [DataType(DataType.Upload)]
         public IFormFile UploadImage { get; set; }
+        public string Likes { get; set; }
+        public string Comments { get; set; }
     }
 }

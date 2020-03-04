@@ -20,6 +20,8 @@ namespace Unitial.Data.Models
         public bool HaveImage { get; set; }
         public string ImageUrl { get; set; }
         public DateTime PostedOn { get; set; }
+        public bool HaveLikes { get; set; }
+        public bool HaveComments { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Like> Likes { get; set; }

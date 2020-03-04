@@ -18,7 +18,7 @@ namespace Unitial.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePost(CreatePostInputModel createPostInput)
+        public IActionResult CreatePost(CreatePostInputModel createPostInput )
         {
             var username = User.Identity.Name;
             var uesrId = postService.GetMyUserIdByUsername(username);

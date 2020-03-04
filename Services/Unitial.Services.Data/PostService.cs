@@ -34,14 +34,27 @@ namespace Unitial.Services.Data
 
         public void CreatePost(CreatePostInputModel createPostInput, string userId)
         {
+            var likes = false;
+            var comments = false;
             var imageUrl = UploadPostCloudinary(userId, createPostInput.UploadImage);
+            if (createPostInput.Likes =="on")
+            {
+                likes = true;
+            }
+            if (createPostInput.Comments == "on")
+            {
+                comments = true;
+
+            }
             var post = new Post()
             {
                 Id = Guid.NewGuid().ToString(),
                 AuthorId = userId,
                 Caption = createPostInput.Caption,
                 HaveImage = true,
-                ImageUrl = imageUrl//createPostInput.ImageUrl
+                ImageUrl = imageUrl,
+                HaveLikes = likes,
+                HaveComments = comments,
             };
             postRepository.AddAsync(post).GetAwaiter().GetResult();
             postRepository.SaveChangesAsync().GetAwaiter().GetResult();

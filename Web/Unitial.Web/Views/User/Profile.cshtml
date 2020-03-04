@@ -37,38 +37,8 @@
                         <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style="width:100px; height:30px; font-weight:500;" value="Edit">Edit</a>
                     </div>
                 </div>
-
-                <div style="display:flex;justify-content:center;align-items:center;">
-                    <div class="accordionWrapper">
-                        <div class="accordionItem close">
-                            <h2 class="accordionItemHeading"> Create New Post.</h2>
-                            <div class="accordionItemContent">
-                                <form method="post" asp-action="CreatePost" asp-controller="Post" enctype="multipart/form-data">
-
-                                    <div class="form-group">
-                                        <textarea style="font-size:16px" class="form-control" placeholder="Post Caption" name="caption" rows="2" pattern="^.{1,200}$" required></textarea>
-                                    </div>
-
-                                    <div class="form-group custom-file">
-
-                                        <input type="file" class=" form-control custom-file-input " style="font-size:16px" name="UploadImage" id="file-upload" accept="image/*" required>
-                                        <label class="form-control custom-file-label" style="font-size:16px" for="customFile">Upload Image</label>
-                                    </div>
-                                    <div style="padding:15px 0px 0px 0px">
-                                            <input type="checkbox" id="likes" name="likes"
-                                                   checked>
-                                            <label style="font-size:16px; font-weight:500; padding-right:10px"  for="likes">Likes</label>
-                                        
-                                            <input type="checkbox" id="comments" name="comments"
-                                                   checked>
-                                            <label style="font-size:16px; font-weight:500" for="comments">Comments</label>
-                                    </div>
-                                    <button class="btn-lg btn--radius btn-outline-dark" style="font-weight:500; width:80px; height:30px; margin-top:15px" type="submit">Create</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                Html.RenderPartial("_PostCreatePartial");
+                
             }
 
 
