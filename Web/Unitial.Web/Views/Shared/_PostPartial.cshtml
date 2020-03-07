@@ -9,12 +9,17 @@
 
                     <div class="media m-3 pt-3">
                         <div class="d-flex mr-0">
-                            <a href="/User/Profile?uesrId=@Model.UserId">
+                            <a href="/User/Profile?uesrId=@Model.AuthorId">
                                 <img class="img-fluid rounded-circle" src="@Model.UserImageUrl" alt="User">
                             </a>
                         </div>
                         <div class="media-body">
-                            <a href="/User/Profile?uesrId=@Model.UserId">
+                            @if (User.Identity.Name == Model.UserName)
+                            {
+                            <a href="/User/Edit" class="btn btn-lg btn-outline-dark" style="width:80px; height:29px; font-weight:500; float:right;" value="Delete">Delete</a>
+
+                            }
+                            <a href="/User/Profile?uesrId=@Model.AuthorId">
                                 <p class="m-0">@Model.UserFullName</p>
                             </a>
 

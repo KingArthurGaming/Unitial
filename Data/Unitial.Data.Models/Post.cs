@@ -14,9 +14,7 @@ namespace Unitial.Data.Models
             this.IsDeleted = false;
         }
         public string Id { get; set; }
-
         public string AuthorId { get; set; }
-
         public ApplicationUser Author { get; set; }
         public string Caption { get; set; }
         public bool HaveImage { get; set; }
@@ -26,7 +24,6 @@ namespace Unitial.Data.Models
         public bool HaveComments { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Like> Likes { get; set; }
     }

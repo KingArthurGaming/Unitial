@@ -94,7 +94,8 @@ namespace Unitial.Services.Data
                    .Where(x => x.AuthorId == userId)
                    .Select(x => new PostViewModel()
                    {
-                       UserId = x.AuthorId,
+                       UserName = x.Author.UserName,
+                       AuthorId = x.AuthorId,
                        UserImageUrl = x.Author.ImageUrl,
                        UserFullName = x.Author.FirstName + " " + x.Author.LastName,
                        PostImageUrl = x.ImageUrl,
@@ -112,7 +113,8 @@ namespace Unitial.Services.Data
                    .All()
                    .Select(x => new PostViewModel()
                    {
-                       UserId = x.AuthorId,
+                       UserName = x.Author.UserName,
+                       AuthorId = x.AuthorId,
                        UserImageUrl = x.Author.ImageUrl,
                        UserFullName = x.Author.FirstName + " " + x.Author.LastName,
                        PostImageUrl = x.ImageUrl,

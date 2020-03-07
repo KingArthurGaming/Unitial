@@ -4,7 +4,9 @@ namespace Unitial.Web.ViewModels
 {
     public class PostViewModel
     {
-        public string UserId { get; set; }
+
+        public string UserName{ get; set; }
+        public string AuthorId { get; set; }
         public string UserImageUrl { get; set; }
         public string UserFullName { get; set; }
         public string PostImageUrl { get; set; }

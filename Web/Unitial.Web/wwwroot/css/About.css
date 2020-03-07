@@ -8,9 +8,8 @@
 #product-header-section, .intro-type .container {
     padding: 68px 15px 72px !important;
 }
-@media(min-width: 1630px)
 .container {
-    width: 1630px;
+    width: 1000px;
 }
 .parallax {
     background-attachment: inherit !important;
