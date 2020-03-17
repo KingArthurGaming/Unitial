@@ -15,6 +15,7 @@ namespace Unitial.Web.ViewModels
         public DateTime PostedOn { get; set; }
         public bool HaveLikes { get; set; }
         public bool HaveComments { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
 

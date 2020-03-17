@@ -37,7 +37,7 @@ namespace Unitial.Services.Data
             var likes = false;
             var comments = false;
             var imageUrl = UploadPostCloudinary(userId, createPostInput.UploadImage);
-            if (createPostInput.Likes =="on")
+            if (createPostInput.Likes == "on")
             {
                 likes = true;
             }
@@ -91,27 +91,7 @@ namespace Unitial.Services.Data
             {
                 posts = postRepository
                    .All()
-                   .Where(x => x.AuthorId == userId)
-                   .Select(x => new PostViewModel()
-                   {
-                       UserName = x.Author.UserName,
-                       AuthorId = x.AuthorId,
-                       UserImageUrl = x.Author.ImageUrl,
-                       UserFullName = x.Author.FirstName + " " + x.Author.LastName,
-                       PostId =x.Id,
-                       PostImageUrl = x.ImageUrl,
-                       Likes = x.Likes.Count.ToString(),
-                       PostedOn =x.PostedOn,
-                       HaveLikes =x.HaveLikes,
-                       HaveComments =x.HaveComments,
-                   })
-                   .OrderByDescending(x=>x.PostedOn)
-                   .ToList();
-            }
-            else
-            {
-                posts = postRepository
-                   .All()
+                   .Where(x => x.AuthorId == userId && x.IsDeleted == false)
                    .Select(x => new PostViewModel()
                    {
                        UserName = x.Author.UserName,
@@ -124,12 +104,44 @@ namespace Unitial.Services.Data
                        PostedOn = x.PostedOn,
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
+                       IsDeleted = x.IsDeleted
+
+                   })
+                   .OrderByDescending(x => x.PostedOn)
+                   .ToList();
+            }
+            else
+            {
+                posts = postRepository
+                    .All()
+                   .Where(x => x.IsDeleted == false)
+                   .Select(x => new PostViewModel()
+                   {
+                       UserName = x.Author.UserName,
+                       AuthorId = x.AuthorId,
+                       UserImageUrl = x.Author.ImageUrl,
+                       UserFullName = x.Author.FirstName + " " + x.Author.LastName,
+                       PostId = x.Id,
+                       PostImageUrl = x.ImageUrl,
+                       Likes = x.Likes.Count.ToString(),
+                       PostedOn = x.PostedOn,
+                       HaveLikes = x.HaveLikes,
+                       HaveComments = x.HaveComments,
+                       IsDeleted = x.IsDeleted
                    })
                    .OrderByDescending(x => x.PostedOn)
                    .ToList();
             }
             return posts;
 
+        }
+
+        public void DeletePost(string postId)
+        {
+            var post = postRepository.All().Where(x => x.Id == postId).FirstOrDefault();
+            post.IsDeleted = true;
+            post.DeletedOn = DateTime.UtcNow;
+            postRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
     }
 }

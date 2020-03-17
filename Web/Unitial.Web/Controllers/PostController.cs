@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Unitial.Services.Data;
 using Unitial.Web.ViewModels;
 
 namespace Unitial.Web.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private readonly IPostService postService;
@@ -28,7 +30,14 @@ namespace Unitial.Web.Controllers
             return Redirect("/User/MyProfile");
         }
 
-        
+        [HttpPost]
+        public IActionResult DeletePost(string id )
+        {
+            postService.DeletePost(id);
+            return Redirect("/User/MyProfile");
+        }
+
+
 
     }
 }

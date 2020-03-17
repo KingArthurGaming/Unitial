@@ -73,7 +73,7 @@
 <script>
     function Delete(id = "No Id given!") {
 
-        //let xhttp = new XMLHttpRequest();
+        let xhttp = new XMLHttpRequest();
 
         //xhttp.onreadystatechange = function () {
         //    if (this.readyState == 4 && this.status == 200) {
@@ -86,8 +86,8 @@
 
         var element = document.getElementById(id);
         element.parentNode.removeChild(element);
-        //xhttp.open("GET", "/api/Data", true);
-        //xhttp.send();
+        xhttp.open("Post", `/Post/DeletePost?id=${id}`, true);
+        xhttp.send();
 
         console.log(id);
     }
