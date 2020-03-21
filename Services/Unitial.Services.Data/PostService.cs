@@ -13,12 +13,13 @@ namespace Unitial.Services.Data
     {
         private readonly IRepository<Post> postRepository;
         private readonly IRepository<ApplicationUser> userRepository;
+        private readonly IRepository<Like> likeRepository;
 
-
-        public PostService(IRepository<Post> postRepository, IRepository<ApplicationUser> userRepository)
+        public PostService(IRepository<Post> postRepository, IRepository<ApplicationUser> userRepository, IRepository<Like> likeRepository)
         {
             this.postRepository = postRepository;
             this.userRepository = userRepository;
+            this.likeRepository = likeRepository;
         }
 
         public string GetMyUserIdByUsername(string username)
@@ -142,6 +143,37 @@ namespace Unitial.Services.Data
             post.IsDeleted = true;
             post.DeletedOn = DateTime.UtcNow;
             postRepository.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+
+        public void LikePost(string postId, string userId)
+        {
+            var like = new Like()
+            {
+                UserId = userId,
+                PostId = postId,
+                LikedOn = DateTime.UtcNow,
+            };
+            likeRepository.AddAsync(like);
+            likeRepository.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+        public void DislikePost(string postId, string userId)
+        {
+
+            var like = likeRepository
+                .All()
+                .Where(x => x.PostId == postId && x.UserId == userId)
+                .FirstOrDefault();
+            likeRepository.Delete(like);
+            likeRepository.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+
+        public string IsLiked(string postId, string userId)
+        {
+            var like = likeRepository
+                .All()
+                .Where(x => x.PostId == postId && x.UserId == userId)
+                .FirstOrDefault();
+            return like != null ? "Yes" : "No";
         }
     }
 }

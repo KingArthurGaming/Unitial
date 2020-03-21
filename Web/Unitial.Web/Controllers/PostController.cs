@@ -16,11 +16,11 @@ namespace Unitial.Web.Controllers
         public PostController(IPostService postService)
         {
             this.postService = postService;
-            
+
         }
 
         [HttpPost]
-        public IActionResult CreatePost(CreatePostInputModel createPostInput )
+        public IActionResult CreatePost(CreatePostInputModel createPostInput)
         {
             var username = User.Identity.Name;
             var uesrId = postService.GetMyUserIdByUsername(username);
@@ -31,12 +31,33 @@ namespace Unitial.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletePost(string id )
+        public IActionResult DeletePost(string id)
         {
             postService.DeletePost(id);
             return Redirect("/User/MyProfile");
         }
 
+        [HttpPost]
+        public string LikePost(string id)
+        {
+
+            var username = User.Identity.Name;
+            var uesrId = postService.GetMyUserIdByUsername(username);
+
+            var isLiked = postService.IsLiked(id, uesrId);
+
+            if (isLiked == "No")
+            {
+                postService.LikePost(id, uesrId);
+
+            }
+            else 
+            {
+                postService.DislikePost(id, uesrId);
+
+            }
+            return isLiked;
+        }
 
 
     }

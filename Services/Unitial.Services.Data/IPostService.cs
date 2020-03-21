@@ -9,8 +9,11 @@ namespace Unitial.Services.Data
     public interface IPostService
     {
         public void CreatePost(CreatePostInputModel createPostInput, string userId);
-        public void DeletePost(string postId);
         public string GetMyUserIdByUsername(string username);
         public ICollection<PostViewModel> GetPostsById(string userId);
+        public void DeletePost(string postId);
+        public void LikePost(string postId, string userId);
+        public void DislikePost(string postId, string userId);
+        public string IsLiked(string postId, string userId);
     }
 }

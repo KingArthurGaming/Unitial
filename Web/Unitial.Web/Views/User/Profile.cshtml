@@ -10,7 +10,7 @@
 <div class="page-header header-filter" data-parallax="true"></div>
 <div class="main main-raised">
     <div class="profile-content">
-        <div class="container"> 
+        <div class="container">
             <div class="row">
                 <div class="col-md-4 ml-auto mr-auto">
                     <div class="profile">
@@ -88,3 +88,14 @@
     }
 </script>
 
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

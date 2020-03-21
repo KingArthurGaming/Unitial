@@ -45,8 +45,15 @@
                         <ul class="float-right">
                         </ul>
                         <ul class="float-left">
-                            <li><a><i class="fa fa-thumbs-up"></i></a></li>
-                            <li><a><span>@Model.Likes Likes</span></a></li>
+                            <button onclick="Like('@Model.PostId')">
+                                <li><a><i class="fa fa-thumbs-up"></i></a></li>
+                            </button>
+                            <li>
+                                <a>
+                                    <span class="id">@Model.Likes</span>
+                                    <span style="margin-left:4px">Likes</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 }
@@ -71,18 +78,9 @@
     </div>
 </div>
 <script>
-    function Delete(id = "No Id given!") {
+    function Delete(id) {
 
         let xhttp = new XMLHttpRequest();
-
-        //xhttp.onreadystatechange = function () {
-        //    if (this.readyState == 4 && this.status == 200) {
-        //        console.log("yes");
-        //    }
-        //    else {
-        //        console.log('no');
-        //    }
-        //};
 
         var element = document.getElementById(id);
         element.parentNode.removeChild(element);
@@ -90,5 +88,32 @@
         xhttp.send();
 
         console.log(id);
+    }
+
+    function Like(id) {
+
+        let xhttp = new XMLHttpRequest();
+
+
+        let element = document.getElementById(id).getElementsByClassName("id")[0];
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == "Yes") {
+                   element.textContent = parseInt(element.textContent) - 1
+
+                }
+                else {
+
+                    element.textContent = parseInt(element.textContent) + 1
+                }
+            }
+        };
+
+
+        xhttp.open("Post", `/Post/LikePost?Id=${id}`, true);
+        xhttp.send();
+
+        console.log(id + " - Is Liked");
     }
 </script>

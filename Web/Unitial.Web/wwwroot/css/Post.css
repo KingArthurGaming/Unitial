@@ -318,3 +318,10 @@ body {
     -moz-transform: rotate(180deg);
     transform: rotate(180deg);
 }
+
+button {
+    color: transparent;
+    background-color: transparent;
+    border: 0px;
+    border-bottom-width: 0px;
+}
