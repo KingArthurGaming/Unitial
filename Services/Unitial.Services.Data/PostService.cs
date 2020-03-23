@@ -103,7 +103,7 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
-                       IsLikedByThisUser = likeRepository.All().Where(Y=>Y.PostId==x.Id&& Y.UserId == x.AuthorId).Any() ? true : false,
+                       IsLikedByThisUser = likeRepository.All().Where(Y=>Y.PostId==x.Id&& Y.UserId == activeUserId).Any() ? true : false,
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
@@ -127,7 +127,7 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
-                       IsLikedByThisUser = likeRepository.All().Where(Y=>Y.PostId==x.Id&& Y.UserId == x.AuthorId).Any() ? true : false,
+                       IsLikedByThisUser = likeRepository.All().Where(Y=>Y.PostId==x.Id&& Y.UserId == activeUserId).Any() ? true : false,
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
