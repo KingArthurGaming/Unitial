@@ -155,7 +155,7 @@
             margin-right: 0px;
         }
 
-            
+
 
         .cardbox-base li a span {
             font-family: 'Rokkitt', serif;
@@ -185,7 +185,6 @@
 /* Cardbox Comments
   ---------------------------------- */
 .cardbox-comments {
-
     padding: 10px 40px 20px 40px !important;
     font-size: 0px;
     text-align: center;
@@ -196,7 +195,7 @@
         margin-right: 0px;
         position: relative;
         right: 17px;
-        bottom:5px;
+        bottom: 5px;
         display: inline-block;
         text-align: center;
         width: 40px;
@@ -208,55 +207,59 @@
 
 .search {
     position: relative;
-    left: 30px;
-    top: -50px;
-    margin-bottom: -40px;
-    border: 2px solid #f4f4f4;
-    width: 123%;
-    height: 50px;
+    right: 6px;
+    border: 2px solid #c5c5c5;
+    width: 150%;
+    height: 45px;
     overflow: hidden;
+    border-radius: 25px;
 }
 
     .search input[type="text"] {
         background-color: #fff;
         line-height: 50px;
         padding: 15px 60px 20px 10px;
+        margin-left: 10px;
         border: none;
-        border-radius: 4px;
-        width: inherit;
+        border-radius: 0px;
+        width: 105%;
         font-family: 'Rokkitt', serif;
         font-size: 20px;
         text-align: left;
         color: #636363;
         height: inherit;
         font-weight: 600;
-
-    }
-    .search ::placeholder {
-        font-size: 16px;
-        color: #888;
     }
 
+*:focus {
+    outline-width: 0px !important;
+}
 
-    .search button {
-        position: absolute;
-        border: none;
-        background-color: transparent;
-        color: #bbbbbb;
-        padding: 20px 25px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+.search ::placeholder {
+    font-size: 16px;
+    color: #888;
+}
+
+
+.search button {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    color: #bbbbbb;
+    padding: 20px 25px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    .search button i {
+        font-size: 20px;
+        line-height: 30px;
+        display: block;
     }
-
-        .search button i {
-            font-size: 20px;
-            line-height: 30px;
-            display: block;
-        }
 
 
 /* ------------------------------- */
@@ -343,3 +346,29 @@ button {
 .notliked {
     color: #8d8d8d;
 }
+
+.comment {
+    position: relative;
+    left: 30px;
+    top: -45px;
+    margin-bottom: -60px;
+    border: 2px solid #c5c5c5;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+    .comment .comment-text {
+        background-color: #fff;
+        line-height: 36px;
+        border: none;
+        border-radius: 0px;
+        width: inherit;
+        font-family: 'Rokkitt', serif;
+        font-size: 18px;
+        text-align: left;
+        color: #636363;
+        height: inherit;
+        font-weight: 600;
+    }

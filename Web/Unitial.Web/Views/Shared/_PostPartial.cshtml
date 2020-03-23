@@ -81,17 +81,32 @@
                 @if (Model.HaveComments)
                 {
                     <div class="cardbox-comments">
-                        <span class="comment-avatar float-left">
-                            <a href="">
-                                <img class="rounded-circle" src="@Model.UserImageUrl">
-                            </a>
-                        </span>
+                        @*<span class="comment-avatar float-left">
+                                <a href="">
+                                    <img class="rounded-circle" src="@Model.UserImageUrl">
+                                </a>
+                            </span>*@
                         <div class="search">
                             <input placeholder="Write a comment" type="text">
-                            <button><i class="fa fa-camera"></i></button>
-                        </div>
 
+                        </div>
                     </div>
+                    if (Model.Caption!=null)
+                    {
+                        <div class="cardbox-comments">
+
+                            <span class="comment-avatar float-left">
+                                <a href="">
+                                    <img class="rounded-circle" src="@Model.UserImageUrl">
+                                </a>
+                            </span>
+
+                            <div class="comment">
+                                <b class="comment-text">@Model.Caption</b>
+                            </div>
+
+                        </div>
+                    }
                 }
             </div>
 
@@ -128,7 +143,7 @@
                 else {
 
                     likeCount.textContent = parseInt(likeCount.textContent) + 1;
-                    likeButton = likeButton.classList.replace("notliked","liked");
+                    likeButton = likeButton.classList.replace("notliked", "liked");
 
                 }
             }
