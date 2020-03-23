@@ -36,9 +36,12 @@ namespace Unitial.Services.Data
             return userId;
         }
 
-        public UsersProfileViewModel GetUserInfo(string userId)
+        public UsersProfileViewModel GetUserInfo(string userId, string activeUserId)
         {
-            var posts = postService.GetPostsById(userId);
+
+            
+
+            var posts = postService.GetPostsById(userId, activeUserId);
 
 
             var userInfo = userRepository
