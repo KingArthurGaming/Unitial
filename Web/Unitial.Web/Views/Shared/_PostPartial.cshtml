@@ -21,7 +21,6 @@
                                         style="width:80px; height:29px; font-weight:500; float:right;" value="Delete">
                                     Delete
                                 </button>
-
                             }
                             <a href="/User/Profile?uesrId=@Model.AuthorId">
                                 <p class="m-0">@Model.UserFullName</p>
@@ -41,21 +40,43 @@
                 </div>
                 @if (Model.HaveLikes)
                 {
-                    <div class="cardbox-base">
-                        <ul class="float-right">
-                        </ul>
-                        <ul class="float-left">
-                            <button onclick="Like('@Model.PostId')">
-                                <li><a><i class="fa fa-thumbs-up"></i></a></li>
-                            </button>
-                            <li>
-                                <a>
-                                    <span class="id">@Model.Likes</span>
-                                    <span style="margin-left:4px">Likes</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
+                    @if (!Model.IsLikedByThisUser)
+                    {
+                        <div class="cardbox-base notliked">
+                            <ul class="float-right">
+                            </ul>
+                            <ul class="float-left">
+                                <button onclick="Like('@Model.PostId')">
+                                    <li><a><i class="fa fa-thumbs-up notliked"></i></a></li>
+                                </button>
+                                <li>
+                                    <a>
+                                        <span class="id">@Model.Likes</span>
+                                        <span style="margin-left:4px">Likes</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="cardbox-base liked">
+                            <ul class="float-right">
+                            </ul>
+                            <ul class="float-left">
+                                <button onclick="Like('@Model.PostId')">
+                                    <li><a><i class="fa fa-thumbs-up liked"></i></a></li>
+                                </button>
+                                <li>
+                                    <a>
+                                        <span class="id">@Model.Likes</span>
+                                        <span style="margin-left:4px">Likes</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 }
                 @if (Model.HaveComments)
                 {
@@ -95,17 +116,20 @@
         let xhttp = new XMLHttpRequest();
 
 
-        let element = document.getElementById(id).getElementsByClassName("id")[0];
+        let likeCount = document.getElementById(id).getElementsByClassName("id")[0];
+        let likeButton = document.getElementById(id).getElementsByClassName("fa")[0];
 
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == "Yes") {
-                   element.textContent = parseInt(element.textContent) - 1
-
+                    likeCount.textContent = parseInt(likeCount.textContent) - 1;
+                    likeButton = likeButton.classList.replace("liked", "notliked");
                 }
                 else {
 
-                    element.textContent = parseInt(element.textContent) + 1
+                    likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                    likeButton = likeButton.classList.replace("notliked","liked");
+
                 }
             }
         };

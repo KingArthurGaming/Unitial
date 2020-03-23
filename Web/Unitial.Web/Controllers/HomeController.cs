@@ -19,7 +19,9 @@
         [Authorize]
         public IActionResult Index(string uesrId)
         {
-            var posts = postService.GetPostsById(null);
+            var username = User.Identity.Name;
+            var activeUserId = postService.GetMyUserIdByUsername(username);
+            var posts = postService.GetPostsById(null, activeUserId);
             var user = new UsersProfileViewModel()
             {
                 FirstName = "Unitial - ",

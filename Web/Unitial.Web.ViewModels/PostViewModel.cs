@@ -13,9 +13,11 @@ namespace Unitial.Web.ViewModels
         public string PostImageUrl { get; set; }
         public string Likes { get; set; }
         public DateTime PostedOn { get; set; }
+        public bool IsLikedByThisUser { get; set; }
         public bool HaveLikes { get; set; }
         public bool HaveComments { get; set; }
         public bool IsDeleted { get; set; }
+
     }
 }
 

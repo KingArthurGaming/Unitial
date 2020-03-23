@@ -25,7 +25,9 @@
         [Authorize]
         public IActionResult Profile(string uesrId)
         {
-            var user = profileService.GetUserInfo(uesrId);
+            var username = User.Identity.Name;
+            var activeUserId = profileService.GetMyUserIdByUsername(username);
+            var user = profileService.GetUserInfo(uesrId, activeUserId);
             return View(user);
         }
 
@@ -34,7 +36,7 @@
         {
             var username = User.Identity.Name;
             var uesrId = profileService.GetMyUserIdByUsername(username);
-            var user = profileService.GetUserInfo(uesrId);
+            var user = profileService.GetUserInfo(uesrId, uesrId);
 
             return View(user);
         }
