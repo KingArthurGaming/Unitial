@@ -22,6 +22,10 @@ namespace Unitial.Web.Controllers
         [HttpPost]
         public IActionResult CreatePost(CreatePostInputModel createPostInput)
         {
+            if (createPostInput.Caption.Length>65)
+            {
+                createPostInput.Caption = "";
+            }
             var username = User.Identity.Name;
             var uesrId = postService.GetMyUserIdByUsername(username);
 
