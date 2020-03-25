@@ -14,12 +14,14 @@ namespace Unitial.Services.Data
         private readonly IRepository<Post> postRepository;
         private readonly IRepository<ApplicationUser> userRepository;
         private readonly IRepository<Like> likeRepository;
+        private readonly ICommentService commentService;
 
-        public PostService(IRepository<Post> postRepository, IRepository<ApplicationUser> userRepository, IRepository<Like> likeRepository)
+        public PostService(IRepository<Post> postRepository, IRepository<ApplicationUser> userRepository, IRepository<Like> likeRepository, ICommentService commentService)
         {
             this.postRepository = postRepository;
             this.userRepository = userRepository;
             this.likeRepository = likeRepository;
+            this.commentService = commentService;
         }
 
         public string GetMyUserIdByUsername(string username)
@@ -104,7 +106,8 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
-                       IsLikedByThisUser = likeRepository.All().Where(Y=>Y.PostId==x.Id&& Y.UserId == activeUserId).Any() ? true : false,
+                       IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
+                       Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
@@ -129,7 +132,8 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
-                       IsLikedByThisUser = likeRepository.All().Where(Y=>Y.PostId==x.Id&& Y.UserId == activeUserId).Any() ? true : false,
+                       IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
+                       Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
@@ -145,7 +149,6 @@ namespace Unitial.Services.Data
         {
             var post = postRepository.All().Where(x => x.Id == postId).FirstOrDefault();
             post.IsDeleted = true;
-            post.DeletedOn = DateTime.UtcNow;
             postRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
 

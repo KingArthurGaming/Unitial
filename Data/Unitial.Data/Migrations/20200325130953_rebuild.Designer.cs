@@ -10,8 +10,8 @@ using Unitial.Data;
 namespace Unitial.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200224100353_posts")]
-    partial class posts
+    [Migration("20200325130953_rebuild")]
+    partial class rebuild
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -320,11 +320,20 @@ namespace Unitial.Data.Migrations
                     b.Property<string>("Caption")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("HaveComments")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("HaveImage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HaveLikes")
                         .HasColumnType("bit");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PostedOn")
                         .HasColumnType("datetime2");

@@ -101,6 +101,10 @@
                             </div>
                         }
 
+                        @foreach (var comment in Model.Comments)
+                        {
+                            Html.RenderPartial("_CommentPartial", comment);
+                        }
                     </div>
                 }
             </div>
@@ -173,8 +177,8 @@
                             </div>
                         </div>`;
 
-                xhttp.open("Post", `/Comment/CreateComment?id=${id}&comment=${comment}`, true);
-                xhttp.send();
+               xhttp.open("Post", `/Comment/CreateComment?id=${id}&comment=${comment}`, true);
+               xhttp.send();
 
             }
             else {

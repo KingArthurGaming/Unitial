@@ -330,6 +330,9 @@ namespace Unitial.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("PostedOn")
                         .HasColumnType("datetime2");
 

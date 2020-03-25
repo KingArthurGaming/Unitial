@@ -12,21 +12,20 @@ namespace Unitial.Web.Controllers
         private readonly ICommentService commentService;
         private readonly IProfileService profileService;
 
-        public CommentController(ICommentService commentService,IProfileService profileService)
+        public CommentController(ICommentService commentService, IProfileService profileService)
         {
             this.commentService = commentService;
             this.profileService = profileService;
         }
-        public IActionResult CreateComment(string id ,string comment)
+        public void CreateComment(string id, string comment)
         {
             if (comment.Length < 0 && comment.Length > 65)
             {
-                return null;
+                return ;
             }
             var username = User.Identity.Name;
             var uesrId = profileService.GetMyUserIdByUsername(username);
             commentService.CreateComment(id, uesrId, comment);
-            return View();
         }
     }
 }

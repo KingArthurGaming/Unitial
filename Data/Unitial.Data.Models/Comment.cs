@@ -8,6 +8,7 @@ namespace Unitial.Data.Models
     {
         public Comment()
         {
+            this.Id = Guid.NewGuid().ToString();
             this.CommentOn = DateTime.UtcNow;
 
         }

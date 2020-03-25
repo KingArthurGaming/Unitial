@@ -4,7 +4,7 @@ using Unitial.Data.Common.Models;
 
 namespace Unitial.Data.Models
 {
-    public class Post : IDeletableEntity
+    public class Post 
     {
         public Post()
         {
@@ -23,7 +23,7 @@ namespace Unitial.Data.Models
         public bool HaveLikes { get; set; }
         public bool HaveComments { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime? DeletedOn { get; set; }
+        //public DateTime? DeletedOn { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Like> Likes { get; set; }
     }
