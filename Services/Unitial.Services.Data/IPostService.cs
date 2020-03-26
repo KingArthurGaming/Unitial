@@ -12,8 +12,6 @@ namespace Unitial.Services.Data
         public string GetMyUserIdByUsername(string username);
         public ICollection<PostViewModel> GetPostsById(string userId, string activeUserId);
         public void DeletePost(string postId);
-        public void LikePost(string postId, string userId);
-        public void DislikePost(string postId, string userId);
-        public string IsLiked(string postId, string userId);
+        
     }
 }

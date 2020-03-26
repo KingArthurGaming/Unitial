@@ -106,6 +106,7 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
+                       ActiveUserImageUrl = userRepository.All().Where(y=>y.Id == activeUserId).Select(x=>x.ImageUrl).FirstOrDefault(),
                        IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
                        Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
@@ -132,6 +133,7 @@ namespace Unitial.Services.Data
                        PostImageUrl = x.ImageUrl,
                        Likes = x.Likes.Count.ToString(),
                        PostedOn = x.PostedOn,
+                       ActiveUserImageUrl = userRepository.All().Where(y => y.Id == activeUserId).Select(x => x.ImageUrl).FirstOrDefault(),
                        IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
                        Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
@@ -152,35 +154,6 @@ namespace Unitial.Services.Data
             postRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
 
-        public void LikePost(string postId, string userId)
-        {
-            var like = new Like()
-            {
-                UserId = userId,
-                PostId = postId,
-                LikedOn = DateTime.UtcNow,
-            };
-            likeRepository.AddAsync(like);
-            likeRepository.SaveChangesAsync().GetAwaiter().GetResult();
-        }
-        public void DislikePost(string postId, string userId)
-        {
-
-            var like = likeRepository
-                .All()
-                .Where(x => x.PostId == postId && x.UserId == userId)
-                .FirstOrDefault();
-            likeRepository.Delete(like);
-            likeRepository.SaveChangesAsync().GetAwaiter().GetResult();
-        }
-
-        public string IsLiked(string postId, string userId)
-        {
-            var like = likeRepository
-                .All()
-                .Where(x => x.PostId == postId && x.UserId == userId)
-                .FirstOrDefault();
-            return like != null ? "Yes" : "No";
-        }
+        
     }
 }

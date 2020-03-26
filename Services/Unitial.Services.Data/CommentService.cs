@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
+using Unitial.Web.ViewModels;
 
 namespace Unitial.Services.Data
 {
@@ -18,11 +19,20 @@ namespace Unitial.Services.Data
             this.userRepository = userRepository;
         }
 
-        public ICollection<Comment> GetComments(string postId)
+        public ICollection<CommetViewModel> GetComments(string postId)
         {
             var comments = commentRepository
                 .All()
                 .Where(x => x.PostId == postId)
+                .Select(x => new CommetViewModel()
+                {
+                    Id = x.Id,
+                    AuthorId = x.AuthorId,
+                    CreatorProfilePic = userRepository.All().Where(y => x.AuthorId == y.Id).Select(x => x.ImageUrl).FirstOrDefault(),
+                    CommentOn = x.CommentOn,
+                    CommentText = x.CommentText,
+                    PostId = x.PostId,
+                })
                 .OrderBy(x => x.CommentOn)
                 .ToList();
 
@@ -36,7 +46,6 @@ namespace Unitial.Services.Data
             {
                 PostId = postId,
                 AuthorId = authorId,
-                //ImageUrl = userRepository.All().Where(x=>x.Id == authorId).Select(x=>x.ImageUrl).FirstOrDefault(),
                 CommentText = text,
             };
             commentRepository.AddAsync(comment);
