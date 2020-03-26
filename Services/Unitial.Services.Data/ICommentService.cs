@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Unitial.Data.Models;
+﻿using System.Collections.Generic;
+using Unitial.Web.ViewModels;
 
 namespace Unitial.Services.Data
 {
     public interface ICommentService
     {
         public void CreateComment(string postId, string authorId, string text);
-        public ICollection<Comment> GetComments(string postId);
+        public ICollection<CommetViewModel> GetComments(string postId);
     }
 }
