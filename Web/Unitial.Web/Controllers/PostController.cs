@@ -41,27 +41,7 @@ namespace Unitial.Web.Controllers
             return Redirect("/User/MyProfile");
         }
 
-        [HttpPost]
-        public string LikePost(string id)
-        {
-
-            var username = User.Identity.Name;
-            var uesrId = postService.GetMyUserIdByUsername(username);
-
-            var isLiked = postService.IsLiked(id, uesrId);
-
-            if (isLiked == "No")
-            {
-                postService.LikePost(id, uesrId);
-
-            }
-            else 
-            {
-                postService.DislikePost(id, uesrId);
-
-            }
-            return isLiked;
-        }
+        
 
 
     }

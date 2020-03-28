@@ -18,7 +18,7 @@
                             @if (User.Identity.Name == Model.UserName)
                             {
                                 <button onclick="Delete('@Model.PostId')" class="btn btn-lg btn-outline-dark"
-                                        style="width:80px; height:29px; font-weight:500; float:right;" value="Delete">
+                                        style="border-radius: 25px; font-size:12px; width:80px; height:29px; font-weight:500; float:right;" value="Delete">
                                     Delete
                                 </button>
                             }
@@ -150,7 +150,7 @@
         };
 
 
-        xhttp.open("Post", `/Post/LikePost?Id=${id}`, true);
+        xhttp.open("Post", `/Like/LikePost?Id=${id}`, true);
         xhttp.send();
 
         console.log(id + " - Is Liked");
@@ -169,7 +169,7 @@
                     `<div class="cardbox-comments">
                             <span class="comment-avatar float-left">
                                 <a href="">
-                                    <img class="rounded-circle" src="@Model.UserImageUrl">
+                                    <img class="rounded-circle" src="@Model.ActiveUserImageUrl">
                                 </a>
                             </span>
                             <div class="comment">

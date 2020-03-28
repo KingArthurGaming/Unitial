@@ -21,25 +21,44 @@
 
 
                         <div class="name">
-                            <h1 style="font-size:40px; text-align: center; margin-top: 20px;margin-bottom: 20px"> @Model.FirstName @Model.LastName</h1>
+                            <h1 style="font-size:45px; letter-spacing:3px; text-align: center; margin-top: 20px;margin-bottom: 20px"> @Model.FirstName @Model.LastName</h1>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="description text-center">
+
+            <div class="description text-center" style="display:flex;justify-content:center;align-items:center;">
                 <p>
-                    @Model.Description
+                    150 Follow    250 Followers
                 </p>
             </div>
+
+            @if (Model.Description != "There is no description yet. Click edit to customize your profile." || User.Identity.Name == Model.Username)
+            {
+                <div class="description text-center">
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+            }
             @if (User.Identity.Name == Model.Username)
             {
                 <div style="display:flex;justify-content:center;align-items:center;">
                     <div style="width:100px;height:30px;">
-                        <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style="width:100px; height:30px; font-weight:500;" value="Edit">Edit</a>
+    
+                        <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style=" border-radius: 25px; width:100px; height:30px; font-weight:500;" value="Edit">Edit</a>
                     </div>
                 </div>
                 Html.RenderPartial("_PostCreatePartial");
 
+            }
+            else
+            {
+                <div style="display:flex;justify-content:center;align-items:center;">
+                    <div style="width:140px;height:35px;">
+                        <button id="NotFollow">Follow</button>
+                    </div>
+                </div>
             }
 
             <section class="hero">
