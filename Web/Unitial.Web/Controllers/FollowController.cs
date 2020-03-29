@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Unitial.Services.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Unitial.Web.Controllers
 {
@@ -25,6 +30,7 @@ namespace Unitial.Web.Controllers
                 followService.Follow(uesrId, FollowedId);
             }
             return isFollowed;
-        }
+        
     }
+}
 }
