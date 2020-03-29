@@ -39,8 +39,7 @@
                 </p>
                 <p>
                     &nbsp;Followers
-                </p>
-            </div>
+
 
             @if (Model.Description != "There is no description yet. Click edit to customize your profile." || User.Identity.Name == Model.Username)
             {
@@ -128,7 +127,6 @@
         }
     }
 </script>
-
 <script>
     function Follow(UserId) {
 
@@ -159,3 +157,4 @@
 
     }
 </script>
+

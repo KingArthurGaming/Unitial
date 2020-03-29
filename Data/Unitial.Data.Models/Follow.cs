@@ -11,6 +11,6 @@ namespace Unitial.Data.Models
         public ApplicationUser Follower { get; set; }
         public string FollowedId { get; set; }
         public ApplicationUser Followed { get; set; }
-
     }
+
 }
