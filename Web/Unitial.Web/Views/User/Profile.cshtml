@@ -21,24 +21,53 @@
 
 
                         <div class="name">
-                            <h1 style="font-size:40px; text-align: center; margin-top: 20px;margin-bottom: 20px"> @Model.FirstName @Model.LastName</h1>
+                            <h1 style="font-size:45px; letter-spacing:3px; text-align: center; margin-top: 20px;margin-bottom: 20px"> @Model.FirstName @Model.LastName</h1>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="description text-center">
+
+            <div class="description text-center" style="display:flex;justify-content:center;align-items:center;">
+                <p id="FollowCount">
+                    150
+                </p>
                 <p>
-                    @Model.Description
+                    &nbsp;Follow &nbsp;&nbsp;
+                </p>
+                <p id="FollowersCount">
+                    250
+                </p>
+                <p>
+                    &nbsp;Followers
                 </p>
             </div>
+
+            @if (Model.Description != "There is no description yet. Click edit to customize your profile." || User.Identity.Name == Model.Username)
+            {
+                <div class="description text-center">
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+            }
             @if (User.Identity.Name == Model.Username)
             {
                 <div style="display:flex;justify-content:center;align-items:center;">
                     <div style="width:100px;height:30px;">
-                        <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style="width:100px; height:30px; font-weight:500;" value="Edit">Edit</a>
+
+                        <a href="/User/Edit" class="btn btn-primary btn-lg btn-outline-dark" style=" border-radius: 25px; width:100px; height:30px; font-weight:500;" value="Edit">Edit</a>
                     </div>
                 </div>
                 Html.RenderPartial("_PostCreatePartial");
+
+            }
+            else
+            {
+                <div style="display:flex;justify-content:center;align-items:center;">
+                    <div style="width:140px;height:35px;">
+                        <button class="Follow-Button" onclick="Follow(`@Model.UserId`)" id="NotFollowed">Follow</button>
+                    </div>
+                </div>
 
             }
 
@@ -97,5 +126,38 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+</script>
+
+<script>
+    function Follow(UserId) {
+
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+
+                let button = document.getElementsByClassName(`Follow-Button`)[0];
+                let followCount = document.getElementById(`FollowersCount`);
+
+                if (xhttp.responseText == `Followed`) {
+
+                    button.id = `NotFollowed`;
+                    button.textContent = `Follow`;
+                    followCount.textContent = parseInt(followCount.textContent) - 1;
+                }
+                else if (xhttp.responseText == `Not Followed`) {
+
+                    button.id = `Followed`;
+                    button.textContent = `Following`;
+                    followCount.textContent = parseInt(followCount.textContent) + 1;
+                }
+                console.log(xhttp.responseText);
+            }
+        }
+        xhttp.open("Post", `/Follow/FollowUser?FollowedId=${UserId}`, true);
+        xhttp.send();
+
     }
 </script>
