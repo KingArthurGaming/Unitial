@@ -26,6 +26,7 @@
         public DbSet<Like> Likes{ get; set; }
         public DbSet<Comment> Comments{ get; set; }
         public DbSet<Post> Posts{ get; set; }
+        public DbSet<Follow> Follows{ get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

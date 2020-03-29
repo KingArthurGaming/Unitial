@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Unitial.Data;
 
 namespace Unitial.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200326113116_RemoveImageToComment")]
+    partial class RemoveImageToComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,26 +291,6 @@ namespace Unitial.Data.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Unitial.Data.Models.Follow", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FollowedId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FollowerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FollowedId");
-
-                    b.HasIndex("FollowerId");
-
-                    b.ToTable("Follows");
-                });
-
             modelBuilder.Entity("Unitial.Data.Models.Like", b =>
                 {
                     b.Property<string>("UserId")
@@ -455,17 +437,6 @@ namespace Unitial.Data.Migrations
                     b.HasOne("Unitial.Data.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
-                });
-
-            modelBuilder.Entity("Unitial.Data.Models.Follow", b =>
-                {
-                    b.HasOne("Unitial.Data.Models.ApplicationUser", "Followed")
-                        .WithMany()
-                        .HasForeignKey("FollowedId");
-
-                    b.HasOne("Unitial.Data.Models.ApplicationUser", "Follower")
-                        .WithMany()
-                        .HasForeignKey("FollowerId");
                 });
 
             modelBuilder.Entity("Unitial.Data.Models.Like", b =>
