@@ -11,5 +11,6 @@ namespace Unitial.Services.Data
         public int GetFollowers(string userId);
         public int GetFollowed(string userId);
         public ICollection<string> GetFollowedIds(string userId);
+
     }
 }
