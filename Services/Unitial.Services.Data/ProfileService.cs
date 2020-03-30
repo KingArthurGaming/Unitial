@@ -13,16 +13,19 @@ namespace Unitial.Services.Data
         private readonly IRepository<ApplicationUser> userRepository;
         private readonly IRepository<Post> postRepository;
         private readonly IPostService postService;
+        private readonly IFollowService followService;
 
         public ProfileService(
             IRepository<ApplicationUser> userRepository,
             IRepository<Post> postRepository,
-            IPostService postService
+            IPostService postService,
+            IFollowService FollowService
             )
         {
             this.userRepository = userRepository;
             this.postRepository = postRepository;
             this.postService = postService;
+            followService = FollowService;
         }
 
         public string GetMyUserIdByUsername(string username)
@@ -38,12 +41,10 @@ namespace Unitial.Services.Data
 
         public UsersProfileViewModel GetUserInfo(string userId, string activeUserId)
         {
-
-            
-
             var posts = postService.GetPostsById(userId, activeUserId);
-
-
+            var followers = followService.GetFollowers(userId);
+            var followed = followService.GetFollowed(userId);
+            var isFollowed = followService.IsFollowed(activeUserId,userId);
             var userInfo = userRepository
                 .All()
                 .Where(x => x.Id == userId)
@@ -55,7 +56,10 @@ namespace Unitial.Services.Data
                     LastName = x.LastName,
                     Description = x.Description,
                     ImageUrl = x.ImageUrl,
-                    PostsViewModels = posts
+                    PostsViewModels = posts,
+                    Followers = followers,
+                    Followed = followed,
+                    IsFollowed = isFollowed
                 })
                 .FirstOrDefault();
             return userInfo;
