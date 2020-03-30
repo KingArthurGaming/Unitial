@@ -6,5 +6,7 @@
         public string IsFollowed(string follower, string followed);
         public void Unfollow(string follower, string followed);
         public void Follow(string follower, string followed);
+        public int GetFollowers(string userId);
+        public int GetFollowed(string userId);
     }
 }

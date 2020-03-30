@@ -52,5 +52,17 @@ namespace Unitial.Services.Data
             followRepository.Delete(follow);
             followRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
+
+        public int GetFollowers(string userId)
+        {
+            var followersCount = followRepository.All().Where(x => x.FollowedId == userId).Count();
+            return followersCount;
+        }
+
+        public int GetFollowed(string userId)
+        {
+            var followingCount = followRepository.All().Where(x => x.FollowerId == userId).Count();
+            return followingCount;
+        }
     }
 }
