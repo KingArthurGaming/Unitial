@@ -64,8 +64,8 @@ namespace Unitial.Services.Data
         {
             var followingCount = followRepository.All().Where(x => x.FollowerId == userId).Count();
             return followingCount;
-        }
-
+        }   
+             
         public ICollection<string> GetFollowedIds(string userId)
         {
             var followingCount = followRepository.All().Where(x => x.FollowerId == userId).Select(x=>x.FollowedId).ToList();
