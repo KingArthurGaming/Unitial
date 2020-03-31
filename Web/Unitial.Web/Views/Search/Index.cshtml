@@ -1,0 +1,43 @@
+﻿@model Unitial.Web.ViewModels.Search.SearchViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+<div class="main main-raised ">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 ml-auto mr-auto">
+                    <div class="profile">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img width="200" height="200" style="width:60%; margin-top:-100px; margin-left:75px; border-radius:50%;box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(0, 0, 0); " src="~/images/Search.png"
+                                     alt="Circle Image" class=" centered-and-cropped">
+                            </div>
+
+
+                            <form method="post">
+                                <div class="row form-group">
+                                    <button id="ApplyTextSearchButton" class="comment-btn" style="top: 47px;margin-left: 246px">
+                                        Search
+                                    </button>
+                                    <div class="cardbox-comments" style="margin-left:-62px">
+                                        <div class="search">
+                                            <input asp-for="@Model.Text" placeholder="Enter user name" class="commentInput form-control" id="TextSearchInput"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            @foreach (var item in Model.Users)
+                            {
+                        <p>
+                            @item.FirstName @item.LastName
+                        </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
