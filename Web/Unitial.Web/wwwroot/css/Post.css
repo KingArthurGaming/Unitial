@@ -6,7 +6,7 @@
 *
 */
 .hero {
-    padding: 6.25rem 0px !important;
+    padding: 1rem 0px !important;
     margin: 0px !important;
 }
 
@@ -406,4 +406,12 @@ button {
     color: #ff443e;
     top: -20px;
     padding-left: 50px;
+}
+
+.NoResolt {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 187px;
+    font-size: 20px;
+    font-weight: 600
 }
