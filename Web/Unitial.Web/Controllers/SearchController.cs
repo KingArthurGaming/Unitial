@@ -11,6 +11,7 @@ using Unitial.Web.ViewModels.Search;
 
 namespace Unitial.Web.Controllers
 {
+
     [Authorize]
     public class SearchController : Controller
     {
@@ -22,16 +23,19 @@ namespace Unitial.Web.Controllers
         }
 
         [HttpGet]
+
         public IActionResult Index(SearchViewModel searchView)
         {
             if (searchView.Text != null)
             {
+
                 searchView.Users = userRepository.All().Where(x =>
                 (x.FirstName.StartsWith(searchView.Text) ||
                 x.LastName.StartsWith(searchView.Text) ||
                 x.FirstName.Contains(searchView.Text) ||
                 x.LastName.Contains(searchView.Text)) &&
                 x.IsDeleted == false
+
                 );
 
             }
