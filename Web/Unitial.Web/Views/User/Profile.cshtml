@@ -83,8 +83,17 @@
                 </div>
 
             }
+            else if (Model.IsFollowed == "Followed")
+            {
+                <div style="display:flex;justify-content:center;align-items:center;">
+                    <div style="width:140px;height:35px;">
+                        <button class="Follow-Button" onclick="Follow(`@Model.UserId`)" id="Followed">Following</button>
+                    </div>
+                </div>
 
-            <section class="hero">
+            }
+
+            <section class="hero" >
 
                 @if (@Model.PostsViewModels.Count > 0)
                 {
