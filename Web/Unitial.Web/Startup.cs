@@ -73,6 +73,8 @@
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<ILikeService, LikeService>();
             services.AddTransient<IFollowService, FollowService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
