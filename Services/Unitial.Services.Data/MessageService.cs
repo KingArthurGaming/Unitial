@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
-using Unitial.Web.ViewModels.Message;
 
 namespace Unitial.Services.Data
 {
