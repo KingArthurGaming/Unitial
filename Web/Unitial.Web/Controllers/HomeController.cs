@@ -9,10 +9,12 @@
     public class HomeController : BaseController
     {
         private readonly IPostService postService;
+        private readonly IUserService userService;
 
-        public HomeController(IPostService postService)
+        public HomeController(IPostService postService, IUserService userService)
         { 
             this.postService = postService;
+            this.userService = userService;
         }
 
 
@@ -20,13 +22,13 @@
         public IActionResult Index(string uesrId)
         {
             var username = User.Identity.Name;
-            var activeUserId = postService.GetMyUserIdByUsername(username);
+            var activeUserId = userService.GetUserByUsername(username);
+
             var posts = postService.GetPostsById(null, activeUserId);
             var user = new UsersProfileViewModel()
             {
-                FirstName = "Unitial - ",
-                LastName = "Global Wall Page.",
-                Description = "Here You Can See Every Post On The Platform",
+                FirstName = "Home Page",
+                Description = "See all your friends posts. And create your own.",
                 ImageUrl = "https://res.cloudinary.com/king-arthur/image/upload/v1582981400/604abd89-83f5-4f0b-89a9-904a693d9a7d_Profile_Picture.png",
                 PostsViewModels = posts,
 
