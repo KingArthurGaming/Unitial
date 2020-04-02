@@ -18,6 +18,7 @@
             this.Posts = new HashSet<Post>();
             this.Comments = new HashSet<Comment>();
             this.Likes = new HashSet<Like>();
+            this.Messages = new HashSet<Message>();
         }
 
         // Audit info
