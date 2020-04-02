@@ -1,0 +1,66 @@
+﻿@model Unitial.Web.ViewModels.Search.SearchViewModel
+
+
+@{
+    this.ViewData["Title"] = "Messages";
+}
+<div class="main main-raised ">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                    <div class="profile">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img width="200" height="200" style="width:40%; height:100%; margin-top:-100px; margin-left:163px; border-radius:50%;box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(0, 0, 0); " src="~/images/Texting.png"
+                                     alt="Circle Image" class=" centered-and-cropped">
+                            </div>
+
+                            <h1>All</h1>
+                            <h1>All</h1>
+                            <h1>All</h1>
+                            <h1>All</h1>
+                            <h1>All</h1>
+
+                            <form method="get">
+                                <div class="row form-group">
+                                    <button id="ApplyTextSearchButton" class="comment-btn" style="top: 47px;margin-left: 333px">
+                                        Search
+                                    </button>
+                                    <div class="cardbox-comments" style="margin-left:29px">
+                                        <div class="search">
+                                            <input asp-for="@Model.Text" placeholder="Enter user name" class="commentInput form-control" id="TextSearchInput" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            @*@if (Model.Users.Count() > 0)
+        {
+            <div style="padding-left:35px">
+                @foreach (var item in Model.Users)
+                {
+                    <span class="cardbox-comments">
+                        <span class="comment-avatar float-left">
+                            <a href="/User/Profile?uesrId=@item.Id">
+                                <img class="rounded-circle" src="@item.ImageUrl">
+                            </a>
+                        </span>
+                        <div class="comment">
+                            <a href="/User/Profile?uesrId=@item.Id" class="comment-text">@item.FirstName @item.LastName</a>
+                        </div>
+                    </span>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="NoResolt">No resolts found.</p>
+        }*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
 
@@ -14,15 +15,7 @@ namespace Unitial.Services.Data
             this.userRepository = userRepository;
             followRepository = FollowRepository;
         }
-        public string GetMyUserIdByUsername(string username)
-        {
-            var userId = userRepository
-                .All()
-                .Where(x => x.UserName == username)
-                .Select(x => x.Id)
-                .FirstOrDefault();
-            return userId;
-        }
+
 
         public string IsFollowed(string follower, string followed)
         {
@@ -51,6 +44,24 @@ namespace Unitial.Services.Data
 
             followRepository.Delete(follow);
             followRepository.SaveChangesAsync().GetAwaiter().GetResult();
+        }
+
+        public int GetFollowers(string userId)
+        {
+            var followersCount = followRepository.All().Where(x => x.FollowedId == userId).Count();
+            return followersCount;
+        }
+
+        public int GetFollowed(string userId)
+        {
+            var followingCount = followRepository.All().Where(x => x.FollowerId == userId).Count();
+            return followingCount;
+        }
+
+        public ICollection<string> GetFollowedIds(string userId)
+        {
+            var followingCount = followRepository.All().Where(x => x.FollowerId == userId).Select(x => x.FollowedId).ToList();
+            return followingCount;
         }
     }
 }
