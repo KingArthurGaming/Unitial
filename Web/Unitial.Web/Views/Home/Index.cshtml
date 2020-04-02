@@ -1,9 +1,8 @@
-﻿@using Unitial.Common
+﻿@model UsersProfileViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="page-header header-filter" data-parallax="true"></div>
 <div class="main main-raised">
     <div class="profile-content">
         <div class="container">
@@ -30,7 +29,7 @@
 
 
             @{Html.RenderPartial("_PostCreatePartial"); }
-            
+
 
 
             <section class="hero">
@@ -47,8 +46,8 @@
                 else
                 {
                     <h3 style="text-align:center">
-                        You have no posts yet.
-                        Click new post to create one!
+                        We have no posts yet.
+                        Follow other people and have fun!
                     </h3>
                 }
 
@@ -58,12 +57,7 @@
     </div>
 </div>
 
-<!-- Jquery needed -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<!-- Function used to shrink nav bar removing paddings and adding black background -->
-
-@*<script src="~js/Profile.js"></script>*@
 
 <script>
     var accItem = document.getElementsByClassName('accordionItem');
@@ -83,7 +77,6 @@
 </script>
 
 <script>
-    // Add the following code if you want the name of the file appear on select
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
