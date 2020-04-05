@@ -1,0 +1,136 @@
+﻿@model Unitial.Web.ViewModels.Message.AllMessagesViewModel
+
+
+@{
+    this.ViewData["Title"] = "Messages";
+}
+<div class="main main-raised ">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 ml-auto mr-auto">
+                    <div class="profile">
+                        <div class="profile">
+                            <div class="container" style="margin-left:-50px; margin-top:25px">
+                                <div class="row">
+
+                                    <div class="col-lg-6 offset-lg-3">
+
+                                        <div class="cardbox shadow-lg bg-white" style="height:auto">
+
+                                            <div class="cardbox-heading">
+
+                                                <div class="media m-3 pt-3">
+                                                    <div class="d-flex mr-0">
+                                                        <a href="/User/Profile?uesrId=@Model.ReceiverUser.Id">
+                                                            <img class="img-fluid rounded-circle" src="@Model.ReceiverUser.ImageUrl" alt="User">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body-chat">
+                                                        <a href="/User/Profile?uesrId=@Model.ReceiverUser.Id">
+                                                            <p class="m-0">@Model.ReceiverUser.FirstName @Model.ReceiverUser.LastName</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="cardbox-item all-messages" style="height:500px; margin-top:0px; overflow-y:scroll">
+
+                                                @if (Model.Messages.Any())
+                                                {
+                                                    <div style="margin-top:20px;">
+
+                                                        @foreach (var item in Model.Messages)
+                                                        {
+                                                            if (item.SenderId == Model.ActriveUserId)
+                                                            {
+                                                                Html.RenderPartial("_SenderMessagePartial", item);
+                                                            }
+                                                            else
+                                                            {
+                                                                Html.RenderPartial("_ReceiverMessagePartial", item);
+                                                            }
+
+                                                        }
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+                                                    <p class="noMessages">There are no messages yet.</p>
+                                                }
+                                            </div>
+                                            <hr />
+                                            <button onclick="SendMessage()" class="chat-btn">| Send</button>
+                                            <div class="cardbox-comments">
+                                                <div class="search">
+                                                    <input placeholder="Write a message" class="commentInput" name="text" type="text" pattern="^.{1,65}$" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function SendMessage() {
+
+        var message = document.getElementsByClassName("commentInput")[0].value;
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200 && this.responseText == "Go") {
+
+
+                if (message.length > 0) {
+                    var element = document.getElementsByClassName("noMessages")[0];
+                    if (element != null) {
+                        element.parentNode.removeChild(element);
+                    }
+                    document.getElementsByClassName("commentInput")[0].value = "";
+
+                    document.getElementsByClassName("all-messages")[0].innerHTML +=
+                        `<div class="senderDiv">
+                       <div class="cardbox-chat">
+                             <div class="chat-sender">
+                                <a class="chat-text">${message}</a>
+                             </div>
+                       </div>
+                    </div>`;
+                    let objDiv = document.getElementsByClassName("all-messages")[0];
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                }
+            }
+        }
+
+        xhttp.open("Post", `/Message/SendMessage?Text=${message} &ConversationId=@Model.ConversationId`, true);
+        xhttp.send();
+    }
+
+
+</script>
+<script>
+    let objDiv = document.getElementsByClassName("all-messages")[0];
+    objDiv.scroll({
+        top: objDiv.clientHeight + 5000,
+        left: 0,
+        behavior: 'smooth'
+    });
+
+    //objDiv.scrollTop = objDiv.scrollHeight;
+
+    window.scroll({
+        top: 150,
+        left: 0,
+        behavior: 'smooth'
+    });
+</script>

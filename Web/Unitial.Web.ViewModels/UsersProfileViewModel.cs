@@ -14,6 +14,9 @@ namespace Unitial.Web.ViewModels
         public string LastName { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public int Followers { get; set; }
+        public int Followed { get; set; }
+        public string IsFollowed { get; set; }
         public ICollection<PostViewModel> PostsViewModels { get; set; }
     }
 }
