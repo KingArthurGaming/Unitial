@@ -11,11 +11,13 @@ namespace Unitial.Web.Controllers
     {
         private readonly ICommentService commentService;
         private readonly IProfileService profileService;
+        private readonly IUserService userService;
 
-        public CommentController(ICommentService commentService, IProfileService profileService)
+        public CommentController(ICommentService commentService, IProfileService profileService, IUserService userService)
         {
             this.commentService = commentService;
             this.profileService = profileService;
+            this.userService = userService;
         }
         public void CreateComment(string id, string comment)
         {
@@ -24,7 +26,7 @@ namespace Unitial.Web.Controllers
                 return ;
             }
             var username = User.Identity.Name;
-            var uesrId = profileService.GetMyUserIdByUsername(username);
+            var uesrId =  userService.GetUserByUsername(username);
             commentService.CreateComment(id, uesrId, comment);
         }
     }
