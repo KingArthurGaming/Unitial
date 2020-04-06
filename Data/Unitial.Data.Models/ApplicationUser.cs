@@ -50,9 +50,6 @@
 
         public string ImageUrl { get; set; }
 
-
-
-
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
@@ -62,5 +59,6 @@
         public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Like> Likes { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }
