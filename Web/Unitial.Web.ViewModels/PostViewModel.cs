@@ -11,6 +11,7 @@ namespace Unitial.Web.ViewModels
         public string AuthorId { get; set; }
         public string UserImageUrl { get; set; }
         public string ActiveUserImageUrl { get; set; }
+        public string ActiveUserId { get; set; }
         public string UserFullName { get; set; }
         public string Caption { get; set; }
         public string PostId { get; set; }

@@ -1,6 +1,6 @@
 using System;
 
-namespace Unitial.Services
+namespace Unitial.Services.Data
 {
     public static class AgeCounterExtension
     {
