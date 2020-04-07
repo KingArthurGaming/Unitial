@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unitial.Data.Common.Repositories;
@@ -78,7 +78,6 @@ namespace Unitial.Services.Data
             var allConversations = new AllConversationsViewModel() { Conversations = conversation };
             return allConversations;
         }
-
 
 
         public bool IsCreated(string senderId, string receiverId)
