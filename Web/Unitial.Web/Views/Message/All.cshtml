@@ -1,0 +1,43 @@
+﻿@model Unitial.Web.ViewModels.Message.AllConversationsViewModel;
+
+
+@{
+    this.ViewData["Title"] = "Messages";
+}
+<div class="main main-raised ">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                    <div class="profile">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img width="200" height="200" style="width:40%; height:100%; margin-top:-100px; margin-left:163px; border-radius:50%;box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(0, 0, 0); " src="~/images/Texting.png"
+                                     alt="Circle Image" class=" centered-and-cropped">
+                                <h1 class="ConvesationTitle">Conversations</h1>
+                            </div>
+
+
+                            @if (Model.Conversations.Count() > 0)
+                            {
+                                <div style="padding-left:35px; padding-top:30px; ">
+                                    @foreach (var item in Model.Conversations)
+                                    {
+                                        item.User.CreatedOn = item.LastUpdate;
+                                        Html.RenderPartial("_ConversationPartial", item.User);
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="NoResolt">No resolts found.</p>
+                            }
+                            <div class="space"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

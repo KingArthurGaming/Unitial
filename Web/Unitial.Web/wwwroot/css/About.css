@@ -8,9 +8,7 @@
 #product-header-section, .intro-type .container {
     padding: 68px 15px 72px !important;
 }
-.container {
-    width: 1000px;
-}
+
 .parallax {
     background-attachment: inherit !important;
 }
