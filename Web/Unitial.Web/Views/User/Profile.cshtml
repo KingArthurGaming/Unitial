@@ -1,4 +1,4 @@
-﻿@using Unitial.Web.ViewModels
+﻿
 @model UsersProfileViewModel
 
 
@@ -7,7 +7,7 @@
 }
 
 
-<div class="page-header header-filter" data-parallax="true"></div>
+
 <div class="main main-raised">
     <div class="profile-content">
         <div class="container">
@@ -15,7 +15,7 @@
                 <div class="col-md-4 ml-auto mr-auto">
                     <div class="profile">
                         <div class="avatar">
-                            <img width="200" height="200" style="width:60%; margin-top:-100px; margin-left:75px; border-radius:50%;box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(0, 0, 0); " src="@Model.ImageUrl"
+                            <img  style="width:215px ; height:215px; margin-top:-100px; margin-left:75px; border-radius:50%;box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(0, 0, 0); " src="@Model.ImageUrl"
                                  alt="Circle Image" class=" centered-and-cropped">
                         </div>
 
@@ -27,24 +27,27 @@
                 </div>
             </div>
 
-            <div class="description text-center" style="display:flex;justify-content:center;align-items:center;">
+            <div class="description text-center" style="        display: flex;
+        justify-content: center;
+        align-items: center;">
                 <p id="FollowCount">
-                    150
+                    @Model.Followed
                 </p>
                 <p>
-                    &nbsp;Follow &nbsp;&nbsp;
+                    &nbsp;Following &nbsp;&nbsp;
                 </p>
                 <p id="FollowersCount">
-                    250
+                    @Model.Followers
                 </p>
                 <p>
                     &nbsp;Followers
                 </p>
             </div>
 
+
             @if (Model.Description != "There is no description yet. Click edit to customize your profile." || User.Identity.Name == Model.Username)
             {
-                <div class="description text-center">
+                <div class="description text-center" style="margin-bottom:15px;margin-top:10px;">
                     <p>
                         @Model.Description
                     </p>
@@ -61,11 +64,23 @@
                 Html.RenderPartial("_PostCreatePartial");
 
             }
-            else
+            else if (Model.IsFollowed == "Not Followed")
             {
                 <div style="display:flex;justify-content:center;align-items:center;">
-                    <div style="width:140px;height:35px;">
+                    <div>
                         <button class="Follow-Button" onclick="Follow(`@Model.UserId`)" id="NotFollowed">Follow</button>
+                        <a href="/Message?receiverId=@Model.UserId"><button class="Follow-Button" id="NotFollowed">Message </button></a>
+
+                    </div>
+                </div>
+
+            }
+            else if (Model.IsFollowed == "Followed")
+            {
+                <div style="display:flex;justify-content:center;align-items:center;">
+                    <div>
+                        <button class="Follow-Button" onclick="Follow(`@Model.UserId`)" id="Followed">Following</button>
+                        <a href="/Message?receiverId=@Model.UserId"><button class="Follow-Button" id="NotFollowed">Message </button></a>
                     </div>
                 </div>
 
@@ -161,3 +176,4 @@
 
     }
 </script>
+
