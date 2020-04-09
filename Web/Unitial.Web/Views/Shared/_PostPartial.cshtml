@@ -28,7 +28,7 @@
 
                             <small>
                                 <span>
-                                    <i class="icon ion-md-time"></i> @Model.PostedOn.ToString("dd/MM/yyyy")
+                                    <i class="icon ion-md-time"></i> @Model.PostedOn.ToString("dd/MM/yyyy HH:mm")
                                 </span>
                             </small>
                         </div>
@@ -91,7 +91,7 @@
                         {
                             <div class="cardbox-comments">
                                 <span class="comment-avatar float-left">
-                                    <a href="">
+                                    <a href="/User/Profile?uesrId=@Model.AuthorId">
                                         <img class="rounded-circle" src="@Model.UserImageUrl">
                                     </a>
                                 </span>
@@ -168,7 +168,7 @@
                 document.getElementById(id).getElementsByClassName("all-Comments")[0].innerHTML +=
                     `<div class="cardbox-comments">
                             <span class="comment-avatar float-left">
-                                <a href="">
+                                <a href="/User/Profile?uesrId=@Model.ActiveUserId">
                                     <img class="rounded-circle" src="@Model.ActiveUserImageUrl">
                                 </a>
                             </span>
