@@ -42,7 +42,6 @@ namespace Unitial.Services.Data
             var conversationId = conversationService.GetConversationId(senderId, receiverId);
 
 
-
             var allMessages = new AllMessagesViewModel()
             {
                 ActriveUserId = senderId,
@@ -59,7 +58,6 @@ namespace Unitial.Services.Data
                 (x.SenderId == senderId && x.ConversationId == conversationId) ||
                (x.SenderId == receiverId && x.ConversationId == conversationId)
                 ).OrderBy(x => x.SendedOn));
-
             return allMessages;
         }
 
