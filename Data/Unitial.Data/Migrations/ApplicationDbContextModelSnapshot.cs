@@ -289,6 +289,31 @@ namespace Unitial.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Unitial.Data.Models.Conversation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SeenFirstUser")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SeenSecondUser")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conversation");
+                });
+
             modelBuilder.Entity("Unitial.Data.Models.Follow", b =>
                 {
                     b.Property<string>("Id")
@@ -325,6 +350,32 @@ namespace Unitial.Data.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("Unitial.Data.Models.Message", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConversationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("SendedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Unitial.Data.Models.Post", b =>
@@ -481,6 +532,17 @@ namespace Unitial.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Unitial.Data.Models.Message", b =>
+                {
+                    b.HasOne("Unitial.Data.Models.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId");
+
+                    b.HasOne("Unitial.Data.Models.ApplicationUser", "Sender")
+                        .WithMany("Messages")
+                        .HasForeignKey("SenderId");
                 });
 
             modelBuilder.Entity("Unitial.Data.Models.Post", b =>

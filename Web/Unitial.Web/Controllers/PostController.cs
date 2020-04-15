@@ -13,10 +13,12 @@ namespace Unitial.Web.Controllers
     public class PostController : Controller
     {
         private readonly IPostService postService;
-        public PostController(IPostService postService)
+        private readonly IUserService userService;
+
+        public PostController(IPostService postService, IUserService userService)
         {
             this.postService = postService;
-
+            this.userService = userService;
         }
 
         [HttpPost]
@@ -27,7 +29,7 @@ namespace Unitial.Web.Controllers
                 createPostInput.Caption = "";
             }
             var username = User.Identity.Name;
-            var uesrId = postService.GetMyUserIdByUsername(username);
+            var uesrId = userService.GetUserIdByUsername(username);
 
             postService.CreatePost(createPostInput, uesrId);
 
