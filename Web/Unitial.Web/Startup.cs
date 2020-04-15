@@ -18,6 +18,7 @@
     using Unitial.Services.Data;
     using Unitial.Services.Mapping;
     using Unitial.Services.Messaging;
+    using Unitial.Web.Hubs;
     using Unitial.Web.ViewModels;
 
     public class Startup
@@ -57,6 +58,7 @@
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
 
             services.AddSingleton(this.configuration);
 
@@ -73,6 +75,9 @@
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<ILikeService, LikeService>();
             services.AddTransient<IFollowService, FollowService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IConversationService, ConversationService>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,9 +105,10 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/HttpError?statusCode={0}");
                 app.UseHsts();
             }
+            app.UseStatusCodePagesWithRedirects("/Home/HttpError?statusCode={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -115,11 +121,12 @@
 
             app.UseEndpoints(
                 endpoints =>
-                    {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapRazorPages();
-                    });
+            {
+                endpoints.MapHub<ChatHub>("/Chat");
+                endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
         }
     }
 }
