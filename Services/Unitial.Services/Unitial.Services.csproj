@@ -11,5 +11,9 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Unitial.Data.Common\Unitial.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Unitial.Data.Models\Unitial.Data.Models.csproj" />
+  </ItemGroup>
 
 </Project>

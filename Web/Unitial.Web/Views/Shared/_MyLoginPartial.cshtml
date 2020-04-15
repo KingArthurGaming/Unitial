@@ -6,8 +6,10 @@
     @if (this.User.Identity.IsAuthenticated)
     {
         <ul>
+            <li><a href="/Search">Search</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/User/MyProfile">My Profile</a></li>
-            <li><a href="#">Messages</a></li>
+            <li><a id="MessageButton" href="/Message">Messages</a></li>
             <li><a href="/About">About</a></li>
             <li>
                 <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
@@ -28,4 +30,5 @@
         </ul>
     }
 </ul>
+
 
