@@ -60,7 +60,6 @@ namespace Unitial.Services.Data
                 (x.SenderId == senderId && x.ConversationId == conversationId) ||
                (x.SenderId == receiverId && x.ConversationId == conversationId)
                 ).OrderBy(x => x.SendedOn));
-
             return allMessages;
         }
 

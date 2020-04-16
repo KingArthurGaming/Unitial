@@ -20,7 +20,6 @@ namespace Unitial.Tests
 
 
 
-
         public class MockPostService : IPostService
         {
             public Task CreatePost(CreatePostInputModel createPostInput, string userId)

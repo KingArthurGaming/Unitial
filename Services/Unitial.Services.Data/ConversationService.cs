@@ -80,7 +80,6 @@ namespace Unitial.Services.Data
         }
 
 
-
         public bool IsCreated(string senderId, string receiverId)
         {
             var IsCreated = conversationRepository.All().Where(x =>

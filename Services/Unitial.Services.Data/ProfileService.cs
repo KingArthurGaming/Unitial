@@ -22,7 +22,6 @@ namespace Unitial.Services.Data
             IRepository<Post> postRepository,
             IPostService postService,
             IFollowService FollowService
-
             )
         {
             this.userRepository = userRepository;
@@ -30,7 +29,6 @@ namespace Unitial.Services.Data
             this.postService = postService;
             followService = FollowService;
         }
-
 
 
         public async Task<UsersProfileViewModel> GetUserInfo(string userId, string activeUserId)
