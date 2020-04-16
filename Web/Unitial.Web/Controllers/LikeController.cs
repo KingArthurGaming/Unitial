@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Unitial.Services.Data;
 
 namespace Unitial.Web.Controllers
 {
+    [Authorize]
     public class LikeController : Controller
     {
         private readonly ILikeService likeService;
-        private readonly IPostService postService;
+        private readonly IUserService userService;
 
-        public LikeController(ILikeService likeService, IPostService postService)
+        public LikeController(ILikeService likeService, IUserService userService)
         {
             this.likeService = likeService;
-            this.postService = postService;
+            this.userService = userService;
         }
         [HttpPost]
         public string LikePost(string id)
         {
+            if (id == null || id.Replace(" ", "").Replace(" ", "").Length <= 0)
+            {
+                return "Id can't be null or empty.";
+            }
 
             var username = User.Identity.Name;
-            var uesrId = postService.GetMyUserIdByUsername(username);
+            var uesrId = userService.GetUserIdByUsername(username);
 
             var isLiked = likeService.IsLiked(id, uesrId);
 
