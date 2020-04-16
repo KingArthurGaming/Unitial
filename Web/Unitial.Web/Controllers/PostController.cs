@@ -13,35 +13,37 @@ namespace Unitial.Web.Controllers
     public class PostController : Controller
     {
         private readonly IPostService postService;
-        public PostController(IPostService postService)
+        private readonly IUserService userService;
+
+        public PostController(IPostService postService, IUserService userService)
         {
             this.postService = postService;
-
+            this.userService = userService;
         }
 
         [HttpPost]
-        public IActionResult CreatePost(CreatePostInputModel createPostInput)
+        public async Task<IActionResult> CreatePost(CreatePostInputModel createPostInput)
         {
-            if (createPostInput.Caption.Length>65)
+            if (createPostInput.Caption.Length > 65)
             {
                 createPostInput.Caption = "";
             }
             var username = User.Identity.Name;
-            var uesrId = postService.GetMyUserIdByUsername(username);
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
 
-            postService.CreatePost(createPostInput, uesrId);
+            postService.CreatePost(createPostInput, uesrId).GetAwaiter().GetResult();
 
             return Redirect("/User/MyProfile");
         }
 
         [HttpPost]
-        public IActionResult DeletePost(string id)
+        public async Task<IActionResult> DeletePost(string id)
         {
-            postService.DeletePost(id);
+            await postService.DeletePost(id);
             return Redirect("/User/MyProfile");
         }
 
-        
+
 
 
     }

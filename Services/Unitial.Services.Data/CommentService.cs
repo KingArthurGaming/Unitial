@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
 using Unitial.Web.ViewModels;
@@ -19,7 +20,7 @@ namespace Unitial.Services.Data
             this.userRepository = userRepository;
         }
 
-        public ICollection<CommetViewModel> GetComments(string postId)
+        public async Task<ICollection<CommetViewModel>> GetComments(string postId)
         {
             var comments = commentRepository
                 .All()
@@ -39,7 +40,7 @@ namespace Unitial.Services.Data
             return comments;
         }
 
-        public void CreateComment(string postId, string authorId, string text)
+        public async Task CreateComment(string postId, string authorId, string text)
         {
 
             var comment = new Comment()
@@ -48,8 +49,8 @@ namespace Unitial.Services.Data
                 AuthorId = authorId,
                 CommentText = text,
             };
-            commentRepository.AddAsync(comment);
-            commentRepository.SaveChangesAsync().GetAwaiter().GetResult();
+            await this.commentRepository.AddAsync(comment);
+            await this.commentRepository.SaveChangesAsync();
         }
     }
 }

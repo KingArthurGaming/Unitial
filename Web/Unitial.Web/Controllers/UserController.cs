@@ -8,17 +8,19 @@
     public class UserController : Controller
     {
         private readonly IProfileService profileService;
+        private readonly IUserService userService;
 
-        public UserController(IProfileService profileService)
+        public UserController(IProfileService profileService, IUserService userService)
         {
             this.profileService = profileService;
+            this.userService = userService;
         }
 
         [Authorize]
         public IActionResult MyProfile()
         {
             var username = User.Identity.Name;
-            var uesrId = profileService.GetMyUserIdByUsername(username);
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
             return Redirect($"Profile?uesrId={uesrId}");
         }
 
@@ -26,8 +28,8 @@
         public IActionResult Profile(string uesrId)
         {
             var username = User.Identity.Name;
-            var activeUserId = profileService.GetMyUserIdByUsername(username);
-            var user = profileService.GetUserInfo(uesrId, activeUserId);
+            var activeUserId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
+            var user = profileService.GetUserInfo(uesrId, activeUserId).GetAwaiter().GetResult();
             return View(user);
         }
 
@@ -35,8 +37,8 @@
         public IActionResult Edit()
         {
             var username = User.Identity.Name;
-            var uesrId = profileService.GetMyUserIdByUsername(username);
-            var user = profileService.GetUserInfo(uesrId, uesrId);
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
+            var user = profileService.GetUserInfo(uesrId, uesrId).GetAwaiter().GetResult();
 
             return View(user);
         }
@@ -50,8 +52,8 @@
                 return View(userInfo);
             }
             var username = User.Identity.Name;
-            var uesrId = profileService.GetMyUserIdByUsername(username);
-            profileService.EditUserInfo(userInfo, uesrId);
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
+              profileService.EditUserInfo(userInfo, uesrId).GetAwaiter().GetResult();
 
             return Redirect($"Profile?uesrId={uesrId}");
         }
