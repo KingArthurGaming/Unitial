@@ -30,6 +30,10 @@
             var username = User.Identity.Name;
             var activeUserId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
             var user = profileService.GetUserInfo(uesrId, activeUserId).GetAwaiter().GetResult();
+            if (user==null)
+            {
+                return Redirect("/Error");
+            }
             return View(user);
         }
 

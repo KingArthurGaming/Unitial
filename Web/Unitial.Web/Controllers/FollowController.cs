@@ -17,6 +17,7 @@ namespace Unitial.Web.Controllers
         }
         public string FollowUser(string FollowedId)
         {
+            
             var username = User.Identity.Name;
             var uesrId =  userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
             var isFollowed = followService.IsFollowed(uesrId, FollowedId);

@@ -38,7 +38,7 @@ namespace Unitial.Services.Data
         }
 
         public string IsLiked(string postId, string userId)
-        {
+        { 
             var like = likeRepository
                 .All()
                 .Where(x => x.PostId == postId && x.UserId == userId)
