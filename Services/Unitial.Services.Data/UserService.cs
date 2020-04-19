@@ -22,6 +22,10 @@ namespace Unitial.Services.Data
                 .Where(x => x.UserName == username)
                 .Select(x => x.Id)
                 .FirstOrDefault();
+            if (userId==null)
+            {
+                return "No such user exist.";
+            }
             return userId;
         }
 
