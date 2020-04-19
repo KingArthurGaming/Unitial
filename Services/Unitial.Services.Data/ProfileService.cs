@@ -31,9 +31,9 @@ namespace Unitial.Services.Data
         }
 
 
-        public async Task<UsersProfileViewModel> GetUserInfo(string userId, string activeUserId)
+        public UsersProfileViewModel GetUserInfo(string userId, string activeUserId)
         {
-            var posts = await postService.GetPostsById(userId, activeUserId);
+            var posts =  postService.GetPostsById(userId, activeUserId);
             var followers = followService.GetFollowers(userId);
             var followed = followService.GetFollowed(userId);
             var isFollowed = followService.IsFollowed(activeUserId, userId);
@@ -65,7 +65,7 @@ namespace Unitial.Services.Data
             if (userInfo.UploadImage != null)
             {
                 var sb = new StringBuilder();
-                var link = UploadProfileImageCloudinary(userId, userInfo.UploadImage).GetAwaiter().GetResult().Split("upload");
+                var link = UploadProfileImageCloudinary(userId, userInfo.UploadImage).Split("upload");
                 sb.Append(link[0]);
                 sb.Append("upload/c_thumb,h_1000,q_auto:good,w_1000");
                 sb.Append(link[1]);
@@ -88,7 +88,7 @@ namespace Unitial.Services.Data
             userRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
 
-        private async Task<string> UploadProfileImageCloudinary(string userId, IFormFile UploadImage)
+        private string UploadProfileImageCloudinary(string userId, IFormFile UploadImage)
         {
             CloudinaryDotNet.Account account =
                 new CloudinaryDotNet.Account("king-arthur", "693651971897844", "JYfv0XETXA21-BnVlBeOmGCrByE");

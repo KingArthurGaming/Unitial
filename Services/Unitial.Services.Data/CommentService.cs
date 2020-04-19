@@ -20,9 +20,9 @@ namespace Unitial.Services.Data
             this.userRepository = userRepository;
         }
 
-        public async Task<ICollection<CommetViewModel>> GetComments(string postId)
+        public ICollection<CommetViewModel> GetComments(string postId)
         {
-            var comments = commentRepository
+            var comments =  commentRepository
                 .All()
                 .Where(x => x.PostId == postId)
                 .Select(x => new CommetViewModel()

@@ -80,7 +80,7 @@ namespace Unitial.Services.Data
             return updatedUrl;
         }
 
-        public async Task<ICollection<PostViewModel>> GetPostsById(string userId, string activeUserId)
+        public ICollection<PostViewModel> GetPostsById(string userId, string activeUserId)
         {
             ICollection<PostViewModel> posts;
             if (userId != null)
@@ -102,7 +102,7 @@ namespace Unitial.Services.Data
                        ActiveUserImageUrl = userRepository.All().Where(y => y.Id == activeUserId).Select(x => x.ImageUrl).FirstOrDefault(),
                        ActiveUserId = activeUserId,
                        IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
-                       Comments =  commentService.GetComments(x.Id).GetAwaiter().GetResult(),
+                       Comments =  commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
@@ -131,7 +131,7 @@ namespace Unitial.Services.Data
                        ActiveUserId = activeUserId,
                        ActiveUserImageUrl = userRepository.All().Where(y => y.Id == activeUserId).Select(x => x.ImageUrl).FirstOrDefault(),
                        IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
-                       Comments = commentService.GetComments(x.Id).GetAwaiter().GetResult(),
+                       Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
