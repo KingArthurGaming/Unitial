@@ -10,7 +10,7 @@ namespace Unitial.Services.Data
     public interface IPostService
     {
         public Task CreatePost(CreatePostInputModel createPostInput, string userId);
-        public Task<ICollection<PostViewModel>> GetPostsById(string userId, string activeUserId);
+        public ICollection<PostViewModel> GetPostsById(string userId, string activeUserId);
         public Task DeletePost(string postId);
 
     }

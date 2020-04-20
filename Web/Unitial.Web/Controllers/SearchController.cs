@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Korzh.EasyQuery.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
 using Unitial.Web.ViewModels.Search;
@@ -24,25 +20,20 @@ namespace Unitial.Web.Controllers
         [HttpGet]
         public IActionResult Index(SearchViewModel searchView)
         {
-            if (searchView.Text != null)
+            if (searchView.Text == null || searchView.Text.Replace(" ", "").Replace(" ", "").Length <= 0 || searchView.Text.Length > 80)
             {
-                if (searchView.Text.Length > 60)
-                {
-                    searchView.Users = userRepository.All();
-                    return View(searchView);
-                }
-                searchView.Users = userRepository.All().Where(x =>
-                (x.FirstName.StartsWith(searchView.Text) ||
-                x.LastName.StartsWith(searchView.Text) ||
-                x.FirstName.Contains(searchView.Text) ||
-                x.LastName.Contains(searchView.Text)) &&
-                x.IsDeleted == false
-                );
-
+                searchView.Users = userRepository.All();
             }
             else
             {
-                searchView.Users = userRepository.All();
+                searchView.Users = userRepository.All().Where(x =>
+                (x.FirstName.ToLower().StartsWith(searchView.Text.ToLower()) ||
+                x.LastName.ToLower().StartsWith(searchView.Text.ToLower()) ||
+                x.FirstName.ToLower().Contains(searchView.Text.ToLower()) ||
+                x.LastName.ToLower().Contains(searchView.Text.ToLower()) ||
+                (x.FirstName + " " + x.LastName).ToLower().Contains(searchView.Text.ToLower())) &&
+                x.IsDeleted == false
+                );
 
             }
             return View(searchView);
