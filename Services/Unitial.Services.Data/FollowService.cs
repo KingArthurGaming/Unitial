@@ -26,7 +26,7 @@ namespace Unitial.Services.Data
             return "Not Followed";
 
         }
-        public void Follow(string follower, string followed)
+        public async Task Follow(string follower, string followed)
         {
 
             var follow = new Follow()
@@ -34,11 +34,11 @@ namespace Unitial.Services.Data
                 FollowerId = follower,
                 FollowedId = followed,
             };
-            followRepository.AddAsync(follow);
-            followRepository.SaveChangesAsync().GetAwaiter().GetResult();
+            await followRepository.AddAsync(follow);
+            await followRepository.SaveChangesAsync();
         }
 
-        public void Unfollow(string follower, string followed)
+        public async Task Unfollow(string follower, string followed)
         {
             var follow = followRepository.All().Where(x => x.FollowedId == followed && x.FollowerId == follower).FirstOrDefault();
 

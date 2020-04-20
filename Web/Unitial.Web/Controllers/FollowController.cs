@@ -17,7 +17,7 @@ namespace Unitial.Web.Controllers
         }
         public string FollowUser(string FollowedId)
         {
-            if (FollowedId == null || FollowedId.Replace(" ", "").Replace(" ", "").Length <= 0)
+            if (FollowedId == null || FollowedId.Replace(" ", "").Replace("ï¿½", "").Length <= 0)
             {
                 return "FollowedId can't be null.";
             }          
