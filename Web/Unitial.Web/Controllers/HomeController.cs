@@ -28,7 +28,7 @@
             var username = User.Identity.Name;
             var activeUserId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
 
-            var posts = postService.GetPostsById(null, activeUserId).GetAwaiter().GetResult();
+            var posts = postService.GetPostsById(null, activeUserId);
             var user = new UsersProfileViewModel()
             {
                 FirstName = "Home Page",

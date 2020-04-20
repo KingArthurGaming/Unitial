@@ -11,16 +11,13 @@ namespace Unitial.Services.Data
     public class ConversationService : IConversationService
     {
         private readonly IRepository<Conversation> conversationRepository;
-        private readonly IRepository<Message> messageRepository;
         private readonly IRepository<ApplicationUser> userRepository;
 
         public ConversationService(
             IRepository<Conversation> conversationRepository,
-            IRepository<Message> messageRepository,
             IRepository<ApplicationUser> userRepository)
         {
             this.conversationRepository = conversationRepository;
-            this.messageRepository = messageRepository;
             this.userRepository = userRepository;
         }
 
@@ -37,9 +34,9 @@ namespace Unitial.Services.Data
                     SeenFirstUser = true,
                     SeenSecondUser = true,
                 };
-                 conversationRepository.AddAsync(conversation);
+                conversationRepository.AddAsync(conversation);
 
-                 conversationRepository.SaveChangesAsync().GetAwaiter().GetResult();
+                conversationRepository.SaveChangesAsync().GetAwaiter().GetResult();
                 return conversation.Id;
             }
             return null;

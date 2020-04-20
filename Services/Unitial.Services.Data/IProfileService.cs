@@ -6,7 +6,7 @@ namespace Unitial.Services.Data
 {
     public interface IProfileService
     {
-        public Task<UsersProfileViewModel> GetUserInfo(string userId, string activeUserId);
+        public UsersProfileViewModel GetUserInfo(string userId, string activeUserId);
         public Task EditUserInfo(UserEditInfoModel userInfo, string userId);
 
 

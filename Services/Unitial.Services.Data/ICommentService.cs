@@ -7,6 +7,6 @@ namespace Unitial.Services.Data
     public interface ICommentService
     {
         public Task CreateComment(string postId, string authorId, string text);
-        public Task<ICollection<CommetViewModel>> GetComments(string postId);
+        public ICollection<CommetViewModel> GetComments(string postId);
     }
 }

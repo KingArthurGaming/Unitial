@@ -17,6 +17,10 @@ namespace Unitial.Web.Controllers
         }
         public string FollowUser(string FollowedId)
         {
+            if (FollowedId == null || FollowedId.Replace(" ", "").Replace(" ", "").Length <= 0)
+            {
+                return "FollowedId can't be null.";
+            }          
             var username = User.Identity.Name;
             var uesrId =  userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
             var isFollowed = followService.IsFollowed(uesrId, FollowedId);
