@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Unitial.Data.Common.Repositories;
 using Unitial.Data.Models;
 
@@ -7,12 +8,10 @@ namespace Unitial.Services.Data
 {
     public class FollowService : IFollowService
     {
-        private readonly IRepository<ApplicationUser> userRepository;
         private readonly IRepository<Follow> followRepository;
 
-        public FollowService(IRepository<ApplicationUser> userRepository, IRepository<Follow> FollowRepository)
+        public FollowService(IRepository<Follow> FollowRepository)
         {
-            this.userRepository = userRepository;
             followRepository = FollowRepository;
         }
 
@@ -27,23 +26,24 @@ namespace Unitial.Services.Data
             return "Not Followed";
 
         }
-        public void Follow(string follower, string followed)
+        public async Task Follow(string follower, string followed)
         {
+
             var follow = new Follow()
             {
                 FollowerId = follower,
                 FollowedId = followed,
             };
-            followRepository.AddAsync(follow);
-            followRepository.SaveChangesAsync().GetAwaiter().GetResult();
+            await followRepository.AddAsync(follow);
+            await followRepository.SaveChangesAsync();
         }
 
-        public void Unfollow(string follower, string followed)
+        public async Task Unfollow(string follower, string followed)
         {
             var follow = followRepository.All().Where(x => x.FollowedId == followed && x.FollowerId == follower).FirstOrDefault();
 
             followRepository.Delete(follow);
-            followRepository.SaveChangesAsync().GetAwaiter().GetResult();
+            await followRepository.SaveChangesAsync();
         }
 
         public int GetFollowers(string userId)

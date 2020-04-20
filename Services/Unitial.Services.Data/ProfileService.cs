@@ -13,27 +13,24 @@ namespace Unitial.Services.Data
     public class ProfileService : IProfileService
     {
         private readonly IRepository<ApplicationUser> userRepository;
-        private readonly IRepository<Post> postRepository;
         private readonly IPostService postService;
         private readonly IFollowService followService;
 
         public ProfileService(
             IRepository<ApplicationUser> userRepository,
-            IRepository<Post> postRepository,
             IPostService postService,
             IFollowService FollowService
             )
         {
             this.userRepository = userRepository;
-            this.postRepository = postRepository;
             this.postService = postService;
             followService = FollowService;
         }
 
 
-        public async Task<UsersProfileViewModel> GetUserInfo(string userId, string activeUserId)
+        public UsersProfileViewModel GetUserInfo(string userId, string activeUserId)
         {
-            var posts = await postService.GetPostsById(userId, activeUserId);
+            var posts =  postService.GetPostsById(userId, activeUserId);
             var followers = followService.GetFollowers(userId);
             var followed = followService.GetFollowed(userId);
             var isFollowed = followService.IsFollowed(activeUserId, userId);
@@ -65,7 +62,7 @@ namespace Unitial.Services.Data
             if (userInfo.UploadImage != null)
             {
                 var sb = new StringBuilder();
-                var link = UploadProfileImageCloudinary(userId, userInfo.UploadImage).GetAwaiter().GetResult().Split("upload");
+                var link = UploadProfileImageCloudinary(userId, userInfo.UploadImage).Split("upload");
                 sb.Append(link[0]);
                 sb.Append("upload/c_thumb,h_1000,q_auto:good,w_1000");
                 sb.Append(link[1]);
@@ -85,10 +82,10 @@ namespace Unitial.Services.Data
                 user.LastName = userInfo.LastName;
             }
 
-            userRepository.SaveChangesAsync().GetAwaiter().GetResult();
+           await userRepository.SaveChangesAsync();
         }
 
-        private async Task<string> UploadProfileImageCloudinary(string userId, IFormFile UploadImage)
+        private string UploadProfileImageCloudinary(string userId, IFormFile UploadImage)
         {
             CloudinaryDotNet.Account account =
                 new CloudinaryDotNet.Account("king-arthur", "693651971897844", "JYfv0XETXA21-BnVlBeOmGCrByE");

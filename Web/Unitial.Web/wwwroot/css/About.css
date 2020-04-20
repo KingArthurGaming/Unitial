@@ -307,8 +307,12 @@ h1 {
 h3 {
     color: black;
     font-family: "Quicksand", sans-serif;
+    /*padding-top: 20px;*/
+    /*padding-bottom: px;*/
 }
+
 a {
-    font-size:28px;
-    color: #666;
+    padding-top: 20px;
+    font-size: 28px;
+    color: #555;
 }
