@@ -18,7 +18,12 @@ namespace Unitial.Services.Data
         private readonly ICommentService commentService;
         private readonly IFollowService followService;
 
-        public PostService(IRepository<Post> postRepository, IRepository<ApplicationUser> userRepository, IRepository<Like> likeRepository, ICommentService commentService, IFollowService followService)
+        public PostService(
+            IRepository<Post> postRepository,
+            IRepository<ApplicationUser> userRepository,
+            IRepository<Like> likeRepository,
+            ICommentService commentService,
+            IFollowService followService)
         {
             this.postRepository = postRepository;
             this.userRepository = userRepository;
@@ -32,7 +37,7 @@ namespace Unitial.Services.Data
         {
             var likes = false;
             var comments = false;
-            var imageUrl = await UploadPostCloudinary(userId, createPostInput.UploadImage);
+            var imageUrl =  UploadPostCloudinary(userId, createPostInput.UploadImage);
             if (createPostInput.Likes == "on")
             {
                 likes = true;
@@ -57,30 +62,36 @@ namespace Unitial.Services.Data
 
         }
 
-        private async Task<string> UploadPostCloudinary(string userId, IFormFile UploadImage)
+        private string UploadPostCloudinary(string userId, IFormFile UploadImage)
         {
-            CloudinaryDotNet.Account account =
-                new CloudinaryDotNet.Account("king-arthur", "693651971897844", "JYfv0XETXA21-BnVlBeOmGCrByE");
-
-            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
-
-            var fileName = $"{userId}_{UploadImage.Name}_Post_Picture";
-
-            var stream = UploadImage.OpenReadStream();
-
-            CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+            if (UploadImage!=null)
             {
-                File = new FileDescription(UploadImage.FileName, stream),
-                PublicId = fileName,
-            };
 
-            CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+                CloudinaryDotNet.Account account =
+                    new CloudinaryDotNet.Account("king-arthur", "693651971897844", "JYfv0XETXA21-BnVlBeOmGCrByE");
 
-            var updatedUrl = cloudinary.GetResource(uploadResult.PublicId).Url;
-            return updatedUrl;
+                CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+
+                var fileName = $"{userId}_{UploadImage.Name}_Post_Picture";
+
+                var stream = UploadImage.OpenReadStream();
+
+                CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+                {
+                    File = new FileDescription(UploadImage.FileName, stream),
+                    PublicId = fileName,
+                };
+
+                CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+
+                var updatedUrl = cloudinary.GetResource(uploadResult.PublicId).Url;
+                return updatedUrl;
+            }
+            return "No image given.";
+
         }
 
-        public async Task<ICollection<PostViewModel>> GetPostsById(string userId, string activeUserId)
+        public ICollection<PostViewModel> GetPostsById(string userId, string activeUserId)
         {
             ICollection<PostViewModel> posts;
             if (userId != null)
@@ -102,7 +113,7 @@ namespace Unitial.Services.Data
                        ActiveUserImageUrl = userRepository.All().Where(y => y.Id == activeUserId).Select(x => x.ImageUrl).FirstOrDefault(),
                        ActiveUserId = activeUserId,
                        IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
-                       Comments =  commentService.GetComments(x.Id).GetAwaiter().GetResult(),
+                       Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted
@@ -131,7 +142,7 @@ namespace Unitial.Services.Data
                        ActiveUserId = activeUserId,
                        ActiveUserImageUrl = userRepository.All().Where(y => y.Id == activeUserId).Select(x => x.ImageUrl).FirstOrDefault(),
                        IsLikedByThisUser = likeRepository.All().Where(Y => Y.PostId == x.Id && Y.UserId == activeUserId).Any() ? true : false,
-                       Comments = commentService.GetComments(x.Id).GetAwaiter().GetResult(),
+                       Comments = commentService.GetComments(x.Id),
                        HaveLikes = x.HaveLikes,
                        HaveComments = x.HaveComments,
                        IsDeleted = x.IsDeleted

@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
     using Unitial.Services.Data;
     using Unitial.Web.ViewModels;
 
@@ -29,16 +30,22 @@
         {
             var username = User.Identity.Name;
             var activeUserId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
-            var user = profileService.GetUserInfo(uesrId, activeUserId).GetAwaiter().GetResult();
+            var user = profileService.GetUserInfo(uesrId, activeUserId);
+            if (user==null)
+            {
+                return Redirect("/Error");
+            }
             return View(user);
         }
 
         [Authorize]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit()
         {
             var username = User.Identity.Name;
-            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
-            var user = profileService.GetUserInfo(uesrId, uesrId).GetAwaiter().GetResult();
+            var uesrId = await userService.GetUserIdByUsername(username);
+
+
+            var user =  profileService.GetUserInfo(uesrId, uesrId);
 
             return View(user);
         }

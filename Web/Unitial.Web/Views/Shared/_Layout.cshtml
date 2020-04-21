@@ -8,7 +8,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -20,7 +20,7 @@
 
 
 
-    @if (this.ViewData["Title"] == "Register" || this.ViewData["Title"] == "Edit" )
+    @if (this.ViewData["Title"] == "Register" || this.ViewData["Title"] == "Edit")
     {
 
         <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -35,7 +35,7 @@
 
         <link rel="stylesheet" href="~/css/register.css">
     }
-    else if (this.ViewData["Title"] == "Log in" )
+    else if (this.ViewData["Title"] == "Log in")
     {
 
 
@@ -66,7 +66,7 @@
         @*<script src="js/Profile.js"></script>*@
 
     }
-    @if (this.ViewData["Title"] == "About" || this.ViewData["Title"] == "Error"|| this.ViewData["Title"] == "Privacy")
+    @if (this.ViewData["Title"] == "About" || this.ViewData["Title"] == "Error" || this.ViewData["Title"] == "Privacy")
     {
         <link rel="stylesheet" href="~/css/About.css">
 
@@ -126,7 +126,7 @@
         let seenAll = true;
         function CheckForNew() {
             if (seenAll == true) {
-                setTimeout(CheckForNew, 1000);
+                setTimeout(CheckForNew, 1010);
             }
             else {
 
@@ -154,7 +154,7 @@
             xhttp.open("Post", `/Message/CheckForNew`, true);
             xhttp.send();
         }
-        setTimeout(CheckForNew, 1005);
+            setTimeout(CheckForNew, 1005);
 
     </script>
 </body>

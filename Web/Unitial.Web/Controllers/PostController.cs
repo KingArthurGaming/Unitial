@@ -28,6 +28,7 @@ namespace Unitial.Web.Controllers
             {
                 createPostInput.Caption = "";
             }
+
             var username = User.Identity.Name;
             var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
 

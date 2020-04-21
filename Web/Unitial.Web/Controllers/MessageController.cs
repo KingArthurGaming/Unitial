@@ -25,8 +25,8 @@ namespace Unitial.Web.Controllers
         public IActionResult All()
         {
             var username = User.Identity.Name;
-            var uesrId =  userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
-            var allConversation =  conversiationService.GetAllConversations(uesrId);
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
+            var allConversation = conversiationService.GetAllConversations(uesrId);
             return View(allConversation);
         }
         [HttpGet]
@@ -39,39 +39,51 @@ namespace Unitial.Web.Controllers
             }
 
             var username = User.Identity.Name;
-            var uesrId =  userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
             var conversationId = "";
-            if (! conversiationService.IsCreated(uesrId, receiverId))
+            if (!conversiationService.IsCreated(uesrId, receiverId))
             {
-                conversationId =  conversiationService.CreateConversation(uesrId, receiverId);
+                conversationId = conversiationService.CreateConversation(uesrId, receiverId);
 
             }
             if (conversationId == null)
             {
                 return Redirect("/Message/All");
             }
-            var chatInfo =  messageService.GetAllMessages(uesrId, receiverId);
+            var chatInfo = messageService.GetAllMessages(uesrId, receiverId);
             return View(chatInfo);
         }
 
         [HttpPost]
         public string SendMessage(string text, string conversationId)
         {
-            if (text == null || text == " " || text == " " || conversationId == null)
+            if (conversationId == null || conversationId.Replace(" ", "").Replace(" ", "").Length <= 0)
             {
-                return null;
+                return "ConversationId can't be null";
+            }
+            if (text == null || text.Replace(" ", "").Replace(" ", "").Length <= 0)
+            {
+                return "Message need to be at least 1 char.";
+
             }
             var username = User.Identity.Name;
-            var uesrId =  userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
+            var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();
             messageService.SendMessage(text, conversationId, uesrId);
             return "Go";
         }
+
+
         [HttpPost]
         public string GetNewMessage(string LastMessage, string ReceiverId)
         {
-            if (LastMessage == null || LastMessage == " " || ReceiverId == " " || ReceiverId == null)
+            if (LastMessage == null || LastMessage.Replace(" ", "").Replace(" ", "").Length <= 0)
             {
-                return null;
+                return "Message incorrect.";
+            }
+            if (ReceiverId == null || ReceiverId.Replace(" ", "").Replace(" ", "").Length <= 0)
+            {
+                return "ReceiverId can't be null.";
+
             }
             var username = User.Identity.Name;
             var uesrId = userService.GetUserIdByUsername(username).GetAwaiter().GetResult();

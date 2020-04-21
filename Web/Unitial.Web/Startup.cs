@@ -18,7 +18,6 @@
     using Unitial.Services.Data;
     using Unitial.Services.Mapping;
     using Unitial.Services.Messaging;
-    using Unitial.Web.Hubs;
     using Unitial.Web.ViewModels;
 
     public class Startup
@@ -58,7 +57,7 @@
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddSignalR();
+            
 
             services.AddSingleton(this.configuration);
 
@@ -122,7 +121,6 @@
             app.UseEndpoints(
                 endpoints =>
             {
-                endpoints.MapHub<ChatHub>("/Chat");
                 endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
